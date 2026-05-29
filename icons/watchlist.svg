@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bg_watchlist" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFF4CC" stop-opacity="0.3"/>
+      <stop offset="60%" stop-color="#FFC942" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#FFA500" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow_watchlist" cx="50%" cy="45%" r="40%">
+      <stop offset="0%" stop-color="#FFE066" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#FFC942" stop-opacity="0"/>
+    </radialGradient>
+    
+    <linearGradient id="screen_FFC942" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFA500" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#FFC942" stop-opacity="0.3"/>
+    </linearGradient>
+  </defs>
+  <!-- Background glow -->
+  <circle cx="256" cy="256" r="240" fill="url(#bg_watchlist)"/>
+  <!-- Inner glow -->
+  <ellipse cx="256" cy="230" rx="180" ry="160" fill="url(#glow_watchlist)" opacity="0.6"/>
+  
+  <!-- Screen frame -->
+  <path d="M100 120 L412 120 C420 120 426 126 426 134 L426 320 C426 328 420 334 412 334 L100 334 
+           C92 334 86 328 86 320 L86 134 C86 126 92 120 100 120Z"
+        fill="url(#screen_FFC942)" stroke="#FFE066" stroke-width="3" opacity="0.5"/>
+  <!-- Screen inner -->
+  <rect x="105" y="138" width="302" height="180" rx="4" fill="#FFA500" opacity="0.3"/>
+  <!-- Play triangle -->
+  <path d="M230 195 L230 290 L310 242 Z" fill="#FFE066" opacity="0.6"/>
+  <!-- Popcorn container -->
+  <path d="M185 350 L195 420 L317 420 L327 350 Z" fill="#FFC942" stroke="#FFE066" stroke-width="2" opacity="0.5"/>
+  <!-- Popcorn stripes -->
+  <line x1="210" y1="355" x2="220" y2="415" stroke="#FFA500" stroke-width="2" opacity="0.3"/>
+  <line x1="240" y1="355" x2="250" y2="415" stroke="#FFA500" stroke-width="2" opacity="0.3"/>
+  <line x1="270" y1="355" x2="280" y2="415" stroke="#FFA500" stroke-width="2" opacity="0.3"/>
+  <line x1="300" y1="355" x2="305" y2="415" stroke="#FFA500" stroke-width="2" opacity="0.3"/>
+  <!-- Popcorn kernels -->
+  <path d="M200 350 C195 340 205 330 215 335 C225 340 220 350 210 350Z" fill="#FFF4CC" opacity="0.5"/>
+  <path d="M235 345 C230 335 240 325 250 330 C260 335 255 345 245 348Z" fill="#FFF4CC" opacity="0.6"/>
+  <path d="M270 348 C265 338 275 328 285 333 C295 338 290 348 280 350Z" fill="#FFF4CC" opacity="0.5"/>
+  <path d="M300 350 C295 340 305 332 312 336 C319 340 315 350 307 350Z" fill="#FFF4CC" opacity="0.4"/>
+  <!-- Stand -->
+  <path d="M230 334 L220 350 L292 350 L282 334" fill="#FFA500" stroke="#FFE066" stroke-width="1.5" opacity="0.4"/>
+  <circle cx="334.7" cy="262.1" r="3.9" fill="#FFF4CC" opacity="0.55"/>
+  <circle cx="288.1" cy="321.1" r="3.7" fill="#FFF4CC" opacity="0.38"/>
+  <circle cx="252.3" cy="314.2" r="3.7" fill="#FFF4CC" opacity="0.48"/>
+  <circle cx="197.4" cy="277.7" r="2.4" fill="#FFF4CC" opacity="0.55"/>
+  <circle cx="183.8" cy="235.7" r="2.4" fill="#FFF4CC" opacity="0.48"/>
+  <circle cx="177.3" cy="106.8" r="2.9" fill="#FFF4CC" opacity="0.50"/>
+  <circle cx="362.6" cy="160.6" r="5.4" fill="#FFF4CC" opacity="0.44"/>
+</svg>

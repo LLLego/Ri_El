@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bg_voice" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFF4B0" stop-opacity="0.3"/>
+      <stop offset="60%" stop-color="#FFD700" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#CC9900" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow_voice" cx="50%" cy="45%" r="40%">
+      <stop offset="0%" stop-color="#FFFACD" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#FFD700" stop-opacity="0"/>
+    </radialGradient>
+    
+  </defs>
+  <!-- Background glow -->
+  <circle cx="256" cy="256" r="240" fill="url(#bg_voice)"/>
+  <!-- Inner glow -->
+  <ellipse cx="256" cy="230" rx="180" ry="160" fill="url(#glow_voice)" opacity="0.6"/>
+  
+  <!-- Mic head -->
+  <path d="M230 160 C230 120 250 100 256 100 C262 100 282 120 282 160 
+           L282 250 C282 290 262 310 256 310 C250 310 230 290 230 250 Z"
+        fill="#FFD700" stroke="#FFFACD" stroke-width="3" opacity="0.5"/>
+  <!-- Mic grille lines -->
+  <line x1="238" y1="140" x2="274" y2="140" stroke="#CC9900" stroke-width="1.5" opacity="0.3"/>
+  <line x1="235" y1="170" x2="277" y2="170" stroke="#CC9900" stroke-width="1.5" opacity="0.3"/>
+  <line x1="234" y1="200" x2="278" y2="200" stroke="#CC9900" stroke-width="1.5" opacity="0.3"/>
+  <line x1="235" y1="230" x2="277" y2="230" stroke="#CC9900" stroke-width="1.5" opacity="0.3"/>
+  <!-- Mic stand -->
+  <path d="M256 310 L256 370" stroke="#FFFACD" stroke-width="5" stroke-linecap="round" opacity="0.6"/>
+  <path d="M220 370 L292 370" stroke="#FFFACD" stroke-width="5" stroke-linecap="round" opacity="0.6"/>
+  <!-- Sound waves left -->
+  <path d="M200 180 C185 200 185 240 200 260" stroke="#FFF4B0" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.4"/>
+  <path d="M175 165 C155 195 155 250 175 280" stroke="#FFF4B0" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.3"/>
+  <path d="M150 150 C125 190 125 260 150 300" stroke="#FFF4B0" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.2"/>
+  <!-- Sound waves right -->
+  <path d="M312 180 C327 200 327 240 312 260" stroke="#FFF4B0" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.4"/>
+  <path d="M337 165 C357 195 357 250 337 280" stroke="#FFF4B0" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.3"/>
+  <path d="M362 150 C387 190 387 260 362 300" stroke="#FFF4B0" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.2"/>
+  <circle cx="346.7" cy="234.6" r="2.3" fill="#FFF4B0" opacity="0.38"/>
+  <circle cx="308.2" cy="304.6" r="5.4" fill="#FFF4B0" opacity="0.67"/>
+  <circle cx="234.7" cy="300.1" r="2.9" fill="#FFF4B0" opacity="0.42"/>
+  <circle cx="162.7" cy="258.0" r="3.0" fill="#FFF4B0" opacity="0.47"/>
+  <circle cx="174.7" cy="168.4" r="5.9" fill="#FFF4B0" opacity="0.43"/>
+  <circle cx="260.3" cy="125.7" r="4.5" fill="#FFF4B0" opacity="0.32"/>
+  <circle cx="320.3" cy="166.2" r="3.0" fill="#FFF4B0" opacity="0.49"/>
+</svg>

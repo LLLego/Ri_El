@@ -1,0 +1,19 @@
+# Local secrets (Firebase config with real keys)
+config.local.js
+
+# Backup files
+index_backup.html
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node
+node_modules/

@@ -1,0 +1,126 @@
+        /* =============================================
+           RESPONSIVE
+           ============================================= */
+        @media (max-width: 768px) {
+            .container { padding: 0 calc(var(--spacing-unit) * 3); }
+            .timeline::before { left: 20px; }
+            .timeline-marker { left: 20px; }
+            .timeline-card { width: calc(100% - 50px); margin-left: 50px !important; }
+            .monthsary-header { padding: 20px 20px 16px; }
+            .monthsary-body { padding: 16px 20px 24px; }
+            .card-gallery { grid-template-columns: repeat(2, 1fr); }
+            .dreams-mini { grid-template-columns: 1fr; }
+            .counter-stats { gap: 12px; }
+            .counter-stat { min-width: 40px; }
+            .counter-stat-value { font-size: 0.9rem; }
+            .counter-stat-label { font-size: 0.55rem; }
+            .theme-switcher { bottom: 100px; right: 10px; padding: 8px 6px; }
+            .theme-dot { width: 22px; height: 22px; }
+            .hero-initials { font-size: clamp(3rem, 10vw, 5rem); }
+            .song-wall { grid-template-columns: 1fr; }
+            .tab-nav { top: 48px; }
+            .tab-pill { padding: 5px 14px; font-size: 0.72rem; }
+            .together-grid { grid-template-columns: 1fr; }
+            .games-grid { grid-template-columns: repeat(2, 1fr); }
+            .game-card { padding: 20px 16px; min-height: 100px; }
+            .roblox-grid { grid-template-columns: repeat(2, 1fr); }
+            .roblox-card-actions { flex-direction: column; }
+            .vn-note { flex-wrap: wrap; }
+            .wl-input-row { flex-direction: column; }
+            .wyr-options { grid-template-columns: 1fr; }
+            .km-answers, .qd-answers, .tr-results, .hb-results { grid-template-columns: 1fr; }
+            .mood-display { grid-template-columns: 1fr; }
+            .notes-grid { grid-template-columns: 1fr; }
+            .name-cards { flex-direction: column; align-items: center; }
+            .name-card { max-width: 240px; width: 100%; }
+            .countdown-display { gap: 10px; }
+            .countdown-value { font-size: 1.6rem; }
+        }
+
+        /* =============================================
+           20-AGENT CRITIQUE FIXES
+           ============================================= */
+
+        /* 1. Text contrast boost */
+        .together-card-subtitle { color: rgba(255,255,255,0.65); }
+        .game-card-desc { color: rgba(255,255,255,0.6); }
+        input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.4); }
+
+        /* 2. Hero warmth */
+        .hero-initials { text-shadow: 0 0 30px rgba(232,184,74,0.3); }
+        .hero-title { text-shadow: 0 0 40px rgba(232,184,74,0.15), 0 0 80px rgba(232,184,74,0.08); }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(at 50% 40%, rgba(232,184,74,0.08) 0%, transparent 60%); pointer-events: none; z-index: 1; }
+
+        /* 3. Game category color accents */
+        .game-card.quiz .game-card-icon { filter: hue-rotate(0deg); }
+        .game-card.creative .game-card-icon { filter: hue-rotate(120deg); }
+        .game-card.party .game-card-icon { filter: hue-rotate(200deg); }
+        .game-card.chill .game-card-icon { filter: hue-rotate(280deg); }
+
+        /* 4. Love letter textarea */
+        .letters-textarea {
+            min-height: 120px; resize: vertical;
+            background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px; padding: 14px;
+            font-family: 'Caveat', cursive; font-size: 1.1rem;
+            color: var(--text-primary); width: 100%; line-height: 1.6;
+        }
+        .letters-textarea:focus { border-color: var(--accent-warm); box-shadow: 0 0 0 3px rgba(201,165,143,0.15); }
+
+        /* 5. Seal animation */
+        @keyframes sealLetter { 0% { transform: scale(1); } 50% { transform: scale(0.95) rotate(-2deg); } 100% { transform: scale(0) rotate(-10deg); opacity: 0; } }
+        .letter-sealing { animation: sealLetter 0.6s ease-in forwards; }
+        @keyframes sealStamp { 0% { transform: scale(0) rotate(-30deg); } 60% { transform: scale(1.2); } 100% { transform: scale(1); } }
+        .seal-stamp { animation: sealStamp 0.4s ease-out 0.3s both; }
+
+        /* 6. Mood pills */
+        .mood-pill { transition: all 0.2s ease; }
+        .mood-pill:hover { transform: scale(1.08); }
+        .mood-pill.selected { border-color: var(--accent-pink); box-shadow: 0 0 12px rgba(224,96,128,0.3); }
+        .mood-pill.mood-sad, .mood-pill.mood-stressed, .mood-pill.mood-lonely {
+            border-color: rgba(122,180,224,0.25); background: color-mix(in srgb, var(--accent-blue) 8%, transparent); color: #9ab4d0;
+        }
+
+        /* 7. Mood history */
+        .mood-history-strip { display: flex; gap: 6px; justify-content: center; margin-top: 12px; }
+        .mood-history-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; background: rgba(255,255,255,0.06); }
+        .mood-history-dot.today { border: 2px solid var(--accent-pink); }
+
+        /* 8. Input focus states */
+        input[type='text']:focus, input[type='password']:focus, textarea:focus {
+            border-color: var(--accent-warm); box-shadow: 0 0 0 3px rgba(201,165,143,0.15); outline: none;
+        }
+        .note-input, .bucket-input, .journal-textarea, .letter-input { transition: border-color 0.3s, box-shadow 0.3s; }
+
+        /* 9. Button consistency */
+        .note-send-btn, .bucket-add-btn, .letter-send-btn, .journal-save-btn {
+            padding: 10px 20px; border-radius: 10px; font-weight: 600; font-size: 0.85rem; transition: all 0.2s;
+        }
+        .note-send-btn:hover, .bucket-add-btn:hover, .letter-send-btn:hover, .journal-save-btn:hover {
+            transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .note-send-btn:active, .bucket-add-btn:active, .letter-send-btn:active, .journal-save-btn:active {
+            transform: scale(0.97);
+        }
+
+        /* 10. Scroll cues */
+        @keyframes scrollBounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+        .scroll-cue { text-align: center; padding: 16px; color: rgba(255,255,255,0.3); font-size: 0.75rem; animation: scrollBounce 2s infinite; }
+        .scroll-cue-arrow { display: inline-block; font-size: 1.2rem; }
+
+        /* 11. Accessibility */
+        *:focus-visible { outline: 2px solid var(--accent-warm); outline-offset: 2px; border-radius: 4px; }
+        button:focus-visible { box-shadow: 0 0 0 3px rgba(201,165,143,0.3); }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+        /* 12. Filipino cultural warmth */
+        .filipino-tag { font-family: 'Caveat', cursive; font-size: 0.85rem; color: var(--accent-gold); opacity: 0.6; }
+        .hero-subtitle { letter-spacing: 0.15em; }
+        .monthsary-badge { background: linear-gradient(135deg, var(--accent-pink), var(--accent-warm)); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; }
+
+        /* 13. Color swatches */
+        .color-swatch { width: 24px; height: 24px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: all 0.2s; }
+        .color-swatch:hover { transform: scale(1.15); }
+        .color-swatch.active { border-color: white; box-shadow: 0 0 8px rgba(255,255,255,0.3); }
+        .color-swatches { display: flex; gap: 8px; justify-content: center; }
+    </style>

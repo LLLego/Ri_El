@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bg_roblox" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFF4B0" stop-opacity="0.3"/>
+      <stop offset="60%" stop-color="#FFD700" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#CC9900" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow_roblox" cx="50%" cy="45%" r="40%">
+      <stop offset="0%" stop-color="#FFE44D" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#FFD700" stop-opacity="0"/>
+    </radialGradient>
+    
+  </defs>
+  <!-- Background glow -->
+  <circle cx="256" cy="256" r="240" fill="url(#bg_roblox)"/>
+  <!-- Inner glow -->
+  <ellipse cx="256" cy="230" rx="180" ry="160" fill="url(#glow_roblox)" opacity="0.6"/>
+  
+  <!-- Controller body -->
+  <path d="M140 260 C120 260 90 290 80 330 C70 370 90 400 120 400 
+           C150 400 180 370 200 340 L220 310 L292 310 L312 340 
+           C332 370 362 400 392 400 C422 400 442 370 432 330 
+           C422 290 392 260 372 260 L340 260 C320 260 300 250 290 235 
+           C280 220 270 210 256 210 C242 210 232 220 222 235 
+           C212 250 192 260 172 260 Z"
+        fill="#CC9900" stroke="#FFD700" stroke-width="3" opacity="0.5"/>
+  <!-- D-pad -->
+  <rect x="160" y="290" width="12" height="40" rx="3" fill="#FFE44D" opacity="0.6"/>
+  <rect x="148" y="302" width="36" height="12" rx="3" fill="#FFE44D" opacity="0.6"/>
+  <!-- ABXY buttons -->
+  <circle cx="340" cy="295" r="8" fill="#FFD700" opacity="0.7"/>
+  <circle cx="358" cy="310" r="8" fill="#FFF4B0" opacity="0.5"/>
+  <circle cx="322" cy="310" r="8" fill="#FFF4B0" opacity="0.5"/>
+  <circle cx="340" cy="325" r="8" fill="#FFD700" opacity="0.6"/>
+  <!-- Analog sticks -->
+  <circle cx="210" cy="330" r="12" fill="none" stroke="#FFE44D" stroke-width="2" opacity="0.4"/>
+  <circle cx="302" cy="350" r="12" fill="none" stroke="#FFE44D" stroke-width="2" opacity="0.4"/>
+  <!-- Center button -->
+  <circle cx="256" cy="280" r="10" fill="#FFF4B0" opacity="0.4"/>
+  <circle cx="416.3" cy="320.0" r="3.1" fill="#FFF4B0" opacity="0.65"/>
+  <circle cx="320.6" cy="400.8" r="6.0" fill="#FFF4B0" opacity="0.66"/>
+  <circle cx="227.6" cy="400.4" r="5.4" fill="#FFF4B0" opacity="0.65"/>
+  <circle cx="161.7" cy="279.5" r="4.8" fill="#FFF4B0" opacity="0.69"/>
+  <circle cx="155.6" cy="181.0" r="4.9" fill="#FFF4B0" opacity="0.39"/>
+  <circle cx="285.4" cy="239.6" r="5.0" fill="#FFF4B0" opacity="0.39"/>
+</svg>

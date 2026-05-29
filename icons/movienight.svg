@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bg_movienight" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#BBAADD" stop-opacity="0.3"/>
+      <stop offset="60%" stop-color="#7B68EE" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#6A5ACD" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow_movienight" cx="50%" cy="45%" r="40%">
+      <stop offset="0%" stop-color="#9370DB" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#7B68EE" stop-opacity="0"/>
+    </radialGradient>
+    
+    <linearGradient id="film_7B68EE" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9370DB"/>
+      <stop offset="100%" stop-color="#6A5ACD"/>
+    </linearGradient>
+  </defs>
+  <!-- Background glow -->
+  <circle cx="256" cy="256" r="240" fill="url(#bg_movienight)"/>
+  <!-- Inner glow -->
+  <ellipse cx="256" cy="230" rx="180" ry="160" fill="url(#glow_movienight)" opacity="0.6"/>
+  
+  <!-- Clapperboard base -->
+  <path d="M120 240 L120 380 C120 390 130 400 140 400 L380 400 C390 400 400 390 400 380 L400 240 Z"
+        fill="#6A5ACD" stroke="#7B68EE" stroke-width="3" opacity="0.5"/>
+  <!-- Clapper top -->
+  <path d="M120 240 L400 240 L400 200 L120 180 Z"
+        fill="#7B68EE" stroke="#9370DB" stroke-width="2" opacity="0.7"/>
+  <!-- Diagonal stripes on clapper -->
+  <path d="M160 190 L180 240" stroke="#6A5ACD" stroke-width="14" opacity="0.4"/>
+  <path d="M220 194 L240 240" stroke="#6A5ACD" stroke-width="14" opacity="0.4"/>
+  <path d="M280 198 L300 240" stroke="#6A5ACD" stroke-width="14" opacity="0.4"/>
+  <path d="M340 202 L360 240" stroke="#6A5ACD" stroke-width="14" opacity="0.4"/>
+  <!-- Film holes -->
+  <circle cx="155" cy="310" r="8" fill="#BBAADD" opacity="0.3"/>
+  <circle cx="155" cy="350" r="8" fill="#BBAADD" opacity="0.3"/>
+  <circle cx="370" cy="310" r="8" fill="#BBAADD" opacity="0.3"/>
+  <circle cx="370" cy="350" r="8" fill="#BBAADD" opacity="0.3"/>
+  <!-- Reel circle -->
+  <circle cx="256" cy="320" r="40" fill="none" stroke="#9370DB" stroke-width="3" opacity="0.4"/>
+  <circle cx="256" cy="320" r="15" fill="#9370DB" opacity="0.3"/>
+  <!-- Stars -->
+  <circle cx="391.3" cy="298.2" r="5.9" fill="#BBAADD" opacity="0.66"/>
+  <circle cx="290.8" cy="414.7" r="2.5" fill="#BBAADD" opacity="0.60"/>
+  <circle cx="209.4" cy="341.0" r="2.6" fill="#BBAADD" opacity="0.66"/>
+  <circle cx="108.4" cy="290.3" r="4.3" fill="#BBAADD" opacity="0.46"/>
+  <circle cx="202.0" cy="170.7" r="3.6" fill="#BBAADD" opacity="0.63"/>
+  <circle cx="293.6" cy="205.2" r="4.8" fill="#BBAADD" opacity="0.45"/>
+</svg>

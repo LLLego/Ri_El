@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bg_typing" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#B0D4F1" stop-opacity="0.3"/>
+      <stop offset="60%" stop-color="#4169E1" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#1E3A8A" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow_typing" cx="50%" cy="45%" r="40%">
+      <stop offset="0%" stop-color="#87CEEB" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#4169E1" stop-opacity="0"/>
+    </radialGradient>
+    
+  </defs>
+  <!-- Background glow -->
+  <circle cx="256" cy="256" r="240" fill="url(#bg_typing)"/>
+  <!-- Inner glow -->
+  <ellipse cx="256" cy="230" rx="180" ry="160" fill="url(#glow_typing)" opacity="0.6"/>
+  
+  <!-- Keyboard body -->
+  <path d="M100 280 C100 270 110 260 130 260 L382 260 C402 260 412 270 412 280 
+           L400 370 C400 380 390 390 370 390 L142 390 C122 390 112 380 112 370 Z"
+        fill="#1E3A8A" stroke="#4169E1" stroke-width="3" opacity="0.5"/>
+  <!-- Key rows -->
+  <g opacity="0.8">
+    <rect x="130" y="275" width="32" height="28" rx="4" fill="#4169E1" opacity="0.6"/>
+    <rect x="168" y="275" width="32" height="28" rx="4" fill="#4169E1" opacity="0.5"/>
+    <rect x="206" y="275" width="32" height="28" rx="4" fill="#4169E1" opacity="0.6"/>
+    <rect x="244" y="275" width="32" height="28" rx="4" fill="#87CEEB" opacity="0.7"/>
+    <rect x="282" y="275" width="32" height="28" rx="4" fill="#4169E1" opacity="0.5"/>
+    <rect x="320" y="275" width="32" height="28" rx="4" fill="#4169E1" opacity="0.6"/>
+    <rect x="358" y="275" width="32" height="28" rx="4" fill="#4169E1" opacity="0.5"/>
+    <!-- Row 2 -->
+    <rect x="140" y="310" width="32" height="28" rx="4" fill="#4169E1" opacity="0.5"/>
+    <rect x="178" y="310" width="32" height="28" rx="4" fill="#4169E1" opacity="0.6"/>
+    <rect x="216" y="310" width="32" height="28" rx="4" fill="#4169E1" opacity="0.5"/>
+    <rect x="254" y="310" width="32" height="28" rx="4" fill="#4169E1" opacity="0.6"/>
+    <rect x="292" y="310" width="32" height="28" rx="4" fill="#4169E1" opacity="0.5"/>
+    <rect x="330" y="310" width="32" height="28" rx="4" fill="#4169E1" opacity="0.6"/>
+    <!-- Spacebar -->
+    <rect x="170" y="345" width="140" height="28" rx="4" fill="#87CEEB" opacity="0.5"/>
+  </g>
+  <!-- Letter hints -->
+  <text x="244" y="294" text-anchor="middle" font-size="14" fill="#B0D4F1" opacity="0.8" font-family="monospace">L</text>
+  <text x="260" y="363" text-anchor="middle" font-size="12" fill="#B0D4F1" opacity="0.6" font-family="monospace">❤</text>
+  <!-- Floating letters -->
+  <text x="160" y="200" font-size="22" fill="#4169E1" opacity="0.3" font-family="serif" transform="rotate(-15 160 200)">A</text>
+  <text x="320" y="180" font-size="26" fill="#87CEEB" opacity="0.25" font-family="serif" transform="rotate(10 320 180)">B</text>
+  <text x="256" y="160" font-size="20" fill="#1E3A8A" opacity="0.2" font-family="serif">C</text>
+  <circle cx="357.2" cy="240.5" r="4.5" fill="#B0D4F1" opacity="0.52"/>
+  <circle cx="291.7" cy="272.1" r="5.4" fill="#B0D4F1" opacity="0.52"/>
+  <circle cx="184.1" cy="265.3" r="4.3" fill="#B0D4F1" opacity="0.57"/>
+  <circle cx="161.1" cy="187.1" r="5.6" fill="#B0D4F1" opacity="0.59"/>
+  <circle cx="278.2" cy="97.5" r="5.1" fill="#B0D4F1" opacity="0.60"/>
+</svg>

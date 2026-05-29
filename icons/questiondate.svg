@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bg_questiondate" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E0E8F0" stop-opacity="0.3"/>
+      <stop offset="60%" stop-color="#B0C4DE" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#778899" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow_questiondate" cx="50%" cy="45%" r="40%">
+      <stop offset="0%" stop-color="#D3D8E8" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#B0C4DE" stop-opacity="0"/>
+    </radialGradient>
+    
+  </defs>
+  <!-- Background glow -->
+  <circle cx="256" cy="256" r="240" fill="url(#bg_questiondate)"/>
+  <!-- Inner glow -->
+  <ellipse cx="256" cy="230" rx="180" ry="160" fill="url(#glow_questiondate)" opacity="0.6"/>
+  
+  <!-- Left heart -->
+  <path d="M180 340 C180 340 90 270 90 200 C90 165 115 140 145 140 
+           C175 140 195 165 200 185 C205 165 225 140 255 140 
+           C285 140 310 165 310 200 C310 270 220 340 200 360"
+        fill="#B0C4DE" opacity="0.3" stroke="#D3D8E8" stroke-width="2.5"/>
+  <!-- Right heart (slightly offset) -->
+  <path d="M310 350 C310 350 220 280 220 210 C220 175 245 150 275 150 
+           C305 150 325 175 330 195 C335 175 355 150 385 150 
+           C415 150 440 175 440 210 C440 280 330 350 310 370"
+        fill="#B0C4DE" opacity="0.2" stroke="#778899" stroke-width="2"/>
+  <!-- Question mark between -->
+  <path d="M256 180 C256 160 265 150 275 150 C285 150 294 160 290 178 C286 196 276 200 276 218"
+        stroke="#D3D8E8" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.8"/>
+  <circle cx="276" cy="234" r="5" fill="#D3D8E8" opacity="0.8"/>
+  <!-- Sparkle between hearts -->
+  <path d="M256 260 L260 250 L264 260 L256 256 L268 256 L256 260Z" fill="#E0E8F0" opacity="0.5"/>
+  <circle cx="356.1" cy="247.4" r="3.8" fill="#E0E8F0" opacity="0.42"/>
+  <circle cx="334.7" cy="322.0" r="4.3" fill="#E0E8F0" opacity="0.53"/>
+  <circle cx="236.0" cy="390.8" r="3.8" fill="#E0E8F0" opacity="0.50"/>
+  <circle cx="216.7" cy="312.2" r="3.9" fill="#E0E8F0" opacity="0.67"/>
+  <circle cx="157.3" cy="262.6" r="3.6" fill="#E0E8F0" opacity="0.43"/>
+  <circle cx="194.6" cy="193.7" r="4.6" fill="#E0E8F0" opacity="0.31"/>
+  <circle cx="305.4" cy="79.2" r="5.1" fill="#E0E8F0" opacity="0.39"/>
+  <circle cx="315.9" cy="176.9" r="4.6" fill="#E0E8F0" opacity="0.59"/>
+</svg>

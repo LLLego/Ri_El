@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bg_draw" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF8060" stop-opacity="0.3"/>
+      <stop offset="60%" stop-color="#FF6347" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#CC3300" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow_draw" cx="50%" cy="45%" r="40%">
+      <stop offset="0%" stop-color="#FFE4B5" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#FF6347" stop-opacity="0"/>
+    </radialGradient>
+    
+  </defs>
+  <!-- Background glow -->
+  <circle cx="256" cy="256" r="240" fill="url(#bg_draw)"/>
+  <!-- Inner glow -->
+  <ellipse cx="256" cy="230" rx="180" ry="160" fill="url(#glow_draw)" opacity="0.6"/>
+  
+  <!-- Brush handle -->
+  <path d="M180 380 L220 340 L340 160 L360 140 L370 130 L360 120 L340 130 L200 310 Z"
+        fill="#CC3300" stroke="#FF6347" stroke-width="2" opacity="0.7"/>
+  <path d="M340 160 L360 140 L370 130 L360 120 L340 130 Z"
+        fill="#FFE4B5" opacity="0.5"/>
+  <!-- Brush tip -->
+  <path d="M180 380 C170 390 160 395 155 390 C145 380 160 360 180 380Z"
+        fill="#FF6347" opacity="0.8"/>
+  <!-- Paint strokes -->
+  <path d="M155 390 C130 400 100 380 120 360 C140 340 160 350 155 390"
+        fill="#FF8060" opacity="0.3"/>
+  <path d="M140 370 Q100 340 80 300 Q70 280 90 270"
+        stroke="#FF6347" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.4"/>
+  <!-- Paint splatter -->
+  <circle cx="100" cy="310" r="8" fill="#FFE4B5" opacity="0.4"/>
+  <circle cx="80" cy="280" r="5" fill="#FF6347" opacity="0.5"/>
+  <circle cx="130" cy="350" r="6" fill="#FF8060" opacity="0.3"/>
+  <!-- Ferrule band -->
+  <path d="M195 350 L210 335 L220 345 L205 360 Z" fill="#FFE4B5" opacity="0.6" stroke="#CC3300" stroke-width="1"/>
+  <circle cx="296.3" cy="310.3" r="3.0" fill="#FF8060" opacity="0.57"/>
+  <circle cx="248.7" cy="355.4" r="3.8" fill="#FF8060" opacity="0.35"/>
+  <circle cx="167.1" cy="383.5" r="5.4" fill="#FF8060" opacity="0.31"/>
+  <circle cx="127.5" cy="307.3" r="4.7" fill="#FF8060" opacity="0.45"/>
+  <circle cx="151.1" cy="223.0" r="2.2" fill="#FF8060" opacity="0.45"/>
+  <circle cx="229.2" cy="244.4" r="2.9" fill="#FF8060" opacity="0.57"/>
+</svg>

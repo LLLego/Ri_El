@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bg_wyr" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#DDA0DD" stop-opacity="0.3"/>
+      <stop offset="60%" stop-color="#9932CC" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#6A0DAD" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow_wyr" cx="50%" cy="45%" r="40%">
+      <stop offset="0%" stop-color="#DDA0DD" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#9932CC" stop-opacity="0"/>
+    </radialGradient>
+    
+  </defs>
+  <!-- Background glow -->
+  <circle cx="256" cy="256" r="240" fill="url(#bg_wyr)"/>
+  <!-- Inner glow -->
+  <ellipse cx="256" cy="230" rx="180" ry="160" fill="url(#glow_wyr)" opacity="0.6"/>
+  
+  <!-- Diverging paths -->
+  <g>
+    <path d="M160 380 C180 300 200 260 256 220 C280 200 290 180 256 132" 
+          stroke="#9932CC" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.8"/>
+    <path d="M160 380 C200 340 240 300 256 220 C320 160 360 140 380 100"
+          stroke="#DDA0DD" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.6"/>
+    <path d="M160 380 C140 320 120 260 140 200 C150 170 170 140 190 120"
+          stroke="#6A0DAD" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.5"/>
+    <!-- Fork point glow -->
+    <circle cx="256" cy="220" r="18" fill="#DDA0DD" opacity="0.4"/>
+    <circle cx="256" cy="220" r="10" fill="#DDA0DD" opacity="0.6"/>
+    <!-- Arrow tips -->
+    <path d="M250 132 L256 118 L262 132" stroke="#9932CC" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M374 104 L384 96 L380 108" stroke="#DDA0DD" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <!-- Question mark -->
+    <text x="256" y="430" text-anchor="middle" font-size="48" font-family="serif" fill="#9932CC" opacity="0.7" font-weight="bold">?</text>
+  </g>
+  <circle cx="409.3" cy="285.4" r="2.4" fill="#DDA0DD" opacity="0.64"/>
+  <circle cx="311.8" cy="317.9" r="3.5" fill="#DDA0DD" opacity="0.45"/>
+  <circle cx="250.9" cy="342.7" r="2.2" fill="#DDA0DD" opacity="0.62"/>
+  <circle cx="176.1" cy="306.1" r="5.5" fill="#DDA0DD" opacity="0.41"/>
+  <circle cx="125.1" cy="246.0" r="5.6" fill="#DDA0DD" opacity="0.43"/>
+  <circle cx="135.9" cy="188.4" r="3.9" fill="#DDA0DD" opacity="0.43"/>
+  <circle cx="264.7" cy="174.5" r="5.8" fill="#DDA0DD" opacity="0.36"/>
+  <circle cx="338.6" cy="158.9" r="4.1" fill="#DDA0DD" opacity="0.66"/>
+</svg>
