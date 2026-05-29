@@ -224,7 +224,7 @@
         /* Letter with typewriter */
         .letter-section {
             margin-bottom: 24px;
-            contain: content; /* isolate reflow — typewriter growth won't repaint gallery below */
+            contain: layout style paint; /* isolate letter repaints from gallery below */
         }
         .letter-text {
             font-family: 'Caveat', cursive; font-size: 1.15rem;

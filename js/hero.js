@@ -1,5 +1,8 @@
 // =============================================
 // TYPEWRITER EFFECT ON LETTERS
+// Reflow-free: pre-renders all chars as <span> with
+// visibility:hidden, then reveals them one by one.
+// visibility is paint-only → zero layout reflow.
 // =============================================
 function initTypewriterLetters() {
     const observer = new IntersectionObserver((entries) => {
@@ -10,25 +13,33 @@ function initTypewriterLetters() {
                 const contentEl = entry.target.querySelector('.letter-content');
                 const cursorEl = entry.target.querySelector('.letter-cursor');
 
-                // Pre-calculate final height so gallery below doesn't shift
-                contentEl.textContent = fullText;
-                const finalHeight = entry.target.offsetHeight;
-                entry.target.style.minHeight = finalHeight + 'px';
-                contentEl.textContent = '';
+                // Build all character spans at once (single reflow)
+                const fragment = document.createDocumentFragment();
+                const spans = [];
+                for (let i = 0; i < fullText.length; i++) {
+                    const span = document.createElement('span');
+                    span.textContent = fullText[i];
+                    span.style.visibility = 'hidden';       // paint-only, no reflow
+                    fragment.appendChild(span);
+                    spans.push(span);
+                }
+                contentEl.appendChild(fragment);
 
+                // Container now has its final size — gallery below is anchored.
+                // Reveal characters one by one (visibility change = paint only)
                 let i = 0;
-                const speed = 25; // ms per character
-                function type() {
-                    if (i < fullText.length) {
-                        contentEl.textContent += fullText[i];
+                const speed = 25;
+                function reveal() {
+                    if (i < spans.length) {
+                        spans[i].style.visibility = 'visible';
                         i++;
-                        setTimeout(type, speed + Math.random() * 15);
+                        setTimeout(reveal, speed + Math.random() * 15);
                     } else {
                         // Remove cursor after done
                         setTimeout(() => { if (cursorEl) cursorEl.style.display = 'none'; }, 2000);
                     }
                 }
-                type();
+                reveal();
             }
         });
     }, { threshold: 0.3 });
