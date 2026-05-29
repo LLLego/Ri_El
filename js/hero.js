@@ -51,6 +51,9 @@ function initFloatingDecorations() {
         if (!el) return null;
         el.style.width = cfg.size + 'px';
         el.style.opacity = cfg.opacity;
+        el.style.position = 'fixed';
+        el.style.pointerEvents = 'none';
+        el.style.zIndex = '-1';
         const { xMin, xMax, yMin, yMax } = cfg.zone;
         const speedMult = 0.7 + Math.random() * 0.6;
         return {
@@ -82,16 +85,32 @@ function initFloatingDecorations() {
             item.y = Math.max(yMin - 2, Math.min(yMax + 2, item.y));
             const rot = item.rotBase + Math.sin(time * item.rotSpeed) * 12;
             if (item.anchor === 'bottom-left') {
-                item.el.style.cssText = `width:${item.el.style.width};opacity:${item.el.style.opacity};position:fixed;pointer-events:none;z-index:-1;bottom:${100-item.y}%;left:${item.x}%;transform:rotate(${rot}deg);transition:opacity 0.5s ease;`;
+                item.el.style.bottom = `${100 - item.y}%`;
+                item.el.style.left = `${item.x}%`;
+                item.el.style.top = '';
+                item.el.style.right = '';
             } else if (item.anchor === 'top-right') {
-                item.el.style.cssText = `width:${item.el.style.width};opacity:${item.el.style.opacity};position:fixed;pointer-events:none;z-index:-1;top:${item.y}%;right:${100-item.x}%;transform:rotate(${rot}deg);transition:opacity 0.5s ease;`;
+                item.el.style.top = `${item.y}%`;
+                item.el.style.right = `${100 - item.x}%`;
+                item.el.style.bottom = '';
+                item.el.style.left = '';
             } else if (item.anchor === 'center-right') {
-                item.el.style.cssText = `width:${item.el.style.width};opacity:${item.el.style.opacity};position:fixed;pointer-events:none;z-index:-1;top:${item.y}%;left:${item.x}%;transform:rotate(${rot}deg);transition:opacity 0.5s ease;`;
+                item.el.style.top = `${item.y}%`;
+                item.el.style.left = `${item.x}%`;
+                item.el.style.bottom = '';
+                item.el.style.right = '';
             } else if (item.anchor === 'bottom-right') {
-                item.el.style.cssText = `width:${item.el.style.width};opacity:${item.el.style.opacity};position:fixed;pointer-events:none;z-index:-1;bottom:${100-item.y}%;right:${100-item.x}%;transform:rotate(${rot}deg);transition:opacity 0.5s ease;`;
+                item.el.style.bottom = `${100 - item.y}%`;
+                item.el.style.right = `${100 - item.x}%`;
+                item.el.style.top = '';
+                item.el.style.left = '';
             } else {
-                item.el.style.cssText = `width:${item.el.style.width};opacity:${item.el.style.opacity};position:fixed;pointer-events:none;z-index:-1;top:${item.y}%;left:${item.x}%;transform:rotate(${rot}deg);transition:opacity 0.5s ease;`;
+                item.el.style.top = `${item.y}%`;
+                item.el.style.left = `${item.x}%`;
+                item.el.style.bottom = '';
+                item.el.style.right = '';
             }
+            item.el.style.transform = `rotate(${rot}deg)`;
         });
         requestAnimationFrame(floatLoop);
     }

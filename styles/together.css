@@ -108,8 +108,11 @@
         /* Together grid */
         .together-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 24px; padding: 20px 0 60px;
+        }
+        @media (max-width: 720px) {
+            .together-grid { grid-template-columns: 1fr; }
         }
         .together-card.full-width { grid-column: 1 / -1; }
 
@@ -381,6 +384,20 @@
             border-color: var(--accent-gold);
             box-shadow: 0 0 8px rgba(255,186,8,0.15);
         }
+
+        /* Mood picker toggle */
+        .mood-picker-toggle {
+            display: block; margin: 12px auto 0; padding: 8px 20px;
+            border-radius: 10px; border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.04); color: var(--text-muted);
+            font-family: 'Nunito', sans-serif; font-size: 0.8rem;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .mood-picker-toggle:hover {
+            border-color: var(--accent-warm); color: var(--text-primary);
+        }
+        .mood-picker-wrap { display: none; }
+        .mood-picker-wrap.open { display: block; }
 
         /* Countdown */
         .countdown-display {
@@ -758,6 +775,21 @@
         }
         .stat-fun .stat-number { color: var(--accent-pink); font-size: 1.3rem; }
         .stat-fun .stat-label { font-size: 0.8rem; color: var(--text-secondary); }
+
+        /* Stat number gentle pulse animation */
+        @keyframes statPulse {
+            0%, 100% { opacity: 0; transform: translateY(8px); }
+            60% { opacity: 1; transform: translateY(-2px); }
+            80% { transform: translateY(0); }
+        }
+        .stat-item .stat-number {
+            animation: statPulse 0.8s ease-out both;
+        }
+        .stat-item:nth-child(2) .stat-number { animation-delay: 0.1s; }
+        .stat-item:nth-child(3) .stat-number { animation-delay: 0.2s; }
+        .stat-item:nth-child(4) .stat-number { animation-delay: 0.3s; }
+        .stat-item:nth-child(5) .stat-number { animation-delay: 0.4s; }
+        .stat-item:nth-child(6) .stat-number { animation-delay: 0.5s; }
 
         /* =============================================
            SPIN THE WHEEL

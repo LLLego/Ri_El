@@ -275,7 +275,30 @@
                     </div>
                 </div>
                 <div class="mood-history-strip" id="moodHistoryStrip"></div>
-                <div class="mood-picker" id="moodPicker"></div>
+                <button class="mood-picker-toggle" onclick="document.getElementById('moodPickerWrap').classList.toggle('open')">Change mood</button>
+                <div class="mood-picker-wrap" id="moodPickerWrap">
+                    <div class="mood-picker" id="moodPicker"></div>
+                </div>
+            </div>
+
+            <!-- LOVE LETTERS -->
+            <div class="together-card reveal-scale">
+                <div class="together-card-header">
+                    <div class="together-card-icon">💌</div>
+                    <div>
+                        <div class="together-card-title">Love Letters</div>
+                        <div class="together-card-subtitle">Write from the heart</div>
+                    </div>
+                </div>
+                <div id="letterCompose" class="letter-compose">
+                    <div class="letter-recipient-row">
+                        To: <span id="letterRecipientName">Ansan</span>
+                        <button class="letter-toggle-btn" onclick="toggleLetterRecipient()">&#x21C4; Switch</button>
+                    </div>
+                    <textarea class="journal-textarea" id="letterTextarea" placeholder="My dearest..."></textarea>
+                    <button class="journal-save-btn" onclick="sendLetter()">💌 Seal &amp; Send</button>
+                </div>
+                <div class="letters-inbox" id="lettersInbox"></div>
             </div>
 
             <!-- OUR DAY JOURNAL -->
@@ -315,26 +338,6 @@
                 </div>
                 <div class="notes-colors" id="noteColors"></div>
                 <div class="notes-grid" id="notesGrid"></div>
-            </div>
-
-            <!-- LOVE LETTERS -->
-            <div class="together-card reveal-scale">
-                <div class="together-card-header">
-                    <div class="together-card-icon">💌</div>
-                    <div>
-                        <div class="together-card-title">Love Letters</div>
-                        <div class="together-card-subtitle">Write from the heart</div>
-                    </div>
-                </div>
-                <div id="letterCompose" class="letter-compose">
-                    <div class="letter-recipient-row">
-                        To: <span id="letterRecipientName">Ansan</span>
-                        <button class="letter-toggle-btn" onclick="toggleLetterRecipient()">&#x21C4; Switch</button>
-                    </div>
-                    <textarea class="journal-textarea" id="letterTextarea" placeholder="My dearest..."></textarea>
-                    <button class="journal-save-btn" onclick="sendLetter()">💌 Seal &amp; Send</button>
-                </div>
-                <div class="letters-inbox" id="lettersInbox"></div>
             </div>
 
             <!-- WHY I LOVE YOU WALL -->
@@ -383,7 +386,7 @@
             </div>
 
             <!-- OPEN WHEN LETTERS -->
-            <div class="together-card reveal-scale">
+            <div class="together-card reveal-scale" style="grid-column: 1 / -1;">
                 <div class="together-card-header">
                     <div class="together-card-icon"><svg width="24" height="24" viewBox="0 0 512 512" fill="none"><defs><radialGradient id="tcO" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#d4a88c" stop-opacity="0.12"/><stop offset="100%" stop-color="#d4a88c" stop-opacity="0"/></radialGradient></defs><circle cx="256" cy="256" r="200" fill="url(#tcO)"/><rect x="100" y="140" width="312" height="232" rx="16" stroke="#d4a88c" stroke-width="14" fill="none"/><path d="M100 156 L256 280 L412 156" stroke="#d4a88c" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.5"/><circle cx="130" cy="100" r="4" fill="#e8b84a" opacity="0.4"/><circle cx="390" cy="110" r="3" fill="#e8b84a" opacity="0.35"/></svg></div>
                     <div>
