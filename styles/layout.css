@@ -222,7 +222,10 @@
         .monthsary-body { padding: 24px 32px 32px; }
 
         /* Letter with typewriter */
-        .letter-section { margin-bottom: 24px; }
+        .letter-section {
+            margin-bottom: 24px;
+            contain: content; /* isolate reflow — typewriter growth won't repaint gallery below */
+        }
         .letter-text {
             font-family: 'Caveat', cursive; font-size: 1.15rem;
             color: var(--text-secondary); line-height: 1.8; font-weight: 400;

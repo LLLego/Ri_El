@@ -9,6 +9,13 @@ function initTypewriterLetters() {
                 const fullText = entry.target.dataset.letter;
                 const contentEl = entry.target.querySelector('.letter-content');
                 const cursorEl = entry.target.querySelector('.letter-cursor');
+
+                // Pre-calculate final height so gallery below doesn't shift
+                contentEl.textContent = fullText;
+                const finalHeight = entry.target.offsetHeight;
+                entry.target.style.minHeight = finalHeight + 'px';
+                contentEl.textContent = '';
+
                 let i = 0;
                 const speed = 25; // ms per character
                 function type() {
