@@ -208,6 +208,7 @@ document.addEventListener('keydown', e => {
             if (img.dataset.src) {
                 img.src = img.dataset.src;
                 img.removeAttribute('data-src');
+                img.dataset.galleryProcessed = '1'; // never blank this image again
             }
             observer.unobserve(img);
         });
@@ -216,6 +217,8 @@ document.addEventListener('keydown', e => {
     // Process gallery images: move src to data-src and observe
     const setupImages = () => {
         document.querySelectorAll('.card-gallery-item img').forEach(img => {
+            // Skip if already processed or already restored
+            if (img.dataset.galleryProcessed) return;
             if (img.src && !img.dataset.src) {
                 img.dataset.src = img.src;
                 img.src = '';
@@ -231,9 +234,7 @@ document.addEventListener('keydown', e => {
         window.addEventListener('load', () => setTimeout(setupImages, 100));
     }
 
-    // Also watch for dynamically added images (if timeline re-renders)
-    const mutationObserver = new MutationObserver(() => {
-        setTimeout(setupImages, 100);
-    });
-    mutationObserver.observe(document.body, { childList: true, subtree: true });
+    // MutationObserver REMOVED — it created an infinite loop:
+    // typewriter span → mutation → setupImages blanks src → img reloads → mutation → repeat
+    // If timeline re-renders, call setupImages() explicitly instead.
 })();

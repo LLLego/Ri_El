@@ -10,8 +10,15 @@ function initTypewriterLetters() {
             if (entry.isIntersecting && !entry.target.dataset.typed) {
                 entry.target.dataset.typed = '1';
                 const fullText = entry.target.dataset.letter;
-                const contentEl = entry.target.querySelector('.letter-content');
-                const cursorEl = entry.target.querySelector('.letter-cursor');
+                const section = entry.target;
+                const contentEl = section.querySelector('.letter-content');
+                const cursorEl = section.querySelector('.letter-cursor');
+
+                // Set full text temporarily to measure final height
+                contentEl.textContent = fullText;
+                const finalHeight = section.offsetHeight;
+                section.style.minHeight = finalHeight + 'px';
+                contentEl.textContent = '';
 
                 // Build all character spans at once (single reflow)
                 const fragment = document.createDocumentFragment();
@@ -19,13 +26,12 @@ function initTypewriterLetters() {
                 for (let i = 0; i < fullText.length; i++) {
                     const span = document.createElement('span');
                     span.textContent = fullText[i];
-                    span.style.visibility = 'hidden';       // paint-only, no reflow
+                    span.style.visibility = 'hidden';
                     fragment.appendChild(span);
                     spans.push(span);
                 }
                 contentEl.appendChild(fragment);
 
-                // Container now has its final size — gallery below is anchored.
                 // Reveal characters one by one (visibility change = paint only)
                 let i = 0;
                 const speed = 25;
@@ -35,7 +41,6 @@ function initTypewriterLetters() {
                         i++;
                         setTimeout(reveal, speed + Math.random() * 15);
                     } else {
-                        // Remove cursor after done
                         setTimeout(() => { if (cursorEl) cursorEl.style.display = 'none'; }, 2000);
                     }
                 }
