@@ -9,6 +9,7 @@ window.selectTrack = selectTrack;
 window.openLightbox = openLightbox;
 window.closeLightbox = closeLightbox;
 window.submitPassword = submitPassword;
+window.sendPoke = sendPoke;
 window.sendNote = sendNote;
 window.sendThinking = sendThinking;
 window.addBucketItem = addBucketItem;

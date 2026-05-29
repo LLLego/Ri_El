@@ -177,6 +177,17 @@
             font-weight: 600; color: var(--accent-pink);
             display: block;
         }
+        .thinking-count-item {
+            text-align: center;
+        }
+        .thinking-count-label {
+            font-size: 0.75rem; color: var(--text-muted);
+            font-family: 'Nunito', sans-serif;
+        }
+        .thinking-count-divider {
+            font-size: 1.2rem; color: var(--accent-pink);
+            align-self: center; opacity: 0.6;
+        }
         .thinking-floating-heart {
             position: absolute; font-size: 1.2rem;
             animation: float-up 1.5s ease-out forwards;
@@ -208,6 +219,9 @@
             transition: all 0.2s;
         }
         .notes-color-pick.active { border-color: var(--text-primary); transform: scale(1.15); }
+        .notes-input-row {
+            display: flex; gap: 8px; margin-bottom: 12px;
+        }
         .notes-send-btn {
             padding: 10px 20px; border-radius: 12px; border: none;
             background: linear-gradient(135deg, var(--accent-warm), var(--accent-gold));
@@ -245,6 +259,9 @@
 
         /* Bucket List */
         .bucket-input-area {
+            display: flex; gap: 8px; margin-bottom: 16px;
+        }
+        .bucket-input-row {
             display: flex; gap: 8px; margin-bottom: 16px;
         }
         .bucket-input {
@@ -335,11 +352,54 @@
             background: color-mix(in srgb, var(--accent-gold) 12%, transparent);
             color: var(--text-primary);
         }
+        .mood-emoji {
+            font-size: 2rem; margin-bottom: 4px;
+        }
+        .mood-label {
+            font-size: 0.8rem; color: var(--text-secondary);
+            font-family: 'Caveat', cursive;
+        }
+        .mood-time {
+            font-size: 0.6rem; color: var(--text-muted); margin-top: 4px;
+        }
+        .mood-divider {
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; color: var(--accent-pink); opacity: 0.6;
+        }
+        .mood-history-strip {
+            display: flex; gap: 6px; justify-content: center;
+            margin-bottom: 16px; flex-wrap: wrap;
+        }
+        .mood-history-dot {
+            width: 28px; height: 28px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.85rem; background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.2s;
+        }
+        .mood-history-dot.today {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 8px rgba(255,186,8,0.15);
+        }
 
         /* Countdown */
         .countdown-display {
             display: flex; justify-content: center; gap: 16px;
             margin: 20px 0;
+        }
+        .cd-unit {
+            text-align: center; min-width: 60px;
+        }
+        .cd-num {
+            font-family: 'Caveat', cursive;
+            font-size: 2.2rem; font-weight: 700;
+            color: var(--accent-gold); line-height: 1;
+            display: block;
+        }
+        .cd-label {
+            font-size: 0.65rem; color: var(--text-muted);
+            text-transform: uppercase; letter-spacing: 0.1em;
+            margin-top: 4px;
         }
         .countdown-unit {
             text-align: center; min-width: 60px;
@@ -369,6 +429,27 @@
         .letters-compose {
             display: flex; flex-direction: column; gap: 8px;
             margin-bottom: 16px;
+        }
+        .letter-compose {
+            display: flex; flex-direction: column; gap: 8px;
+            margin-bottom: 16px;
+        }
+        .letter-recipient-row {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 0.85rem; color: var(--text-secondary);
+            font-family: 'Nunito', sans-serif; margin-bottom: 4px;
+        }
+        .letter-toggle-btn {
+            padding: 4px 12px; border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.04);
+            color: var(--text-muted); font-size: 0.72rem;
+            cursor: pointer; transition: all 0.2s;
+            font-family: 'Nunito', sans-serif;
+        }
+        .letter-toggle-btn:hover {
+            border-color: var(--accent-warm);
+            color: var(--text-primary);
         }
         .letters-to-toggle {
             display: flex; gap: 6px; margin-bottom: 4px;

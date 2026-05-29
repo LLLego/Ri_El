@@ -115,11 +115,17 @@ function resolveUserKey() {
     resolveUserKeyFromName(userName);
     if (!userKey) userKey = 'name1'; // fallback
 
-    // Update mood labels
-    document.getElementById('moodYouName').textContent = userName;
-    document.getElementById('moodThemName').textContent = userKey === 'name1' ? DATA.couple.name2 : DATA.couple.name1;
-    document.getElementById('thinkingLabelYou').textContent = userName + ' today';
-    document.getElementById('thinkingLabelThem').textContent = (userKey === 'name1' ? DATA.couple.name2 : DATA.couple.name1) + ' today';
-    document.getElementById('letterRecipientName').textContent = userKey === 'name1' ? DATA.couple.name2 : DATA.couple.name1;
+    // Update mood labels (null-guarded — elements may not exist yet)
+    const themName = userKey === 'name1' ? DATA.couple.name2 : DATA.couple.name1;
+    const moodYou = document.getElementById('moodYouName');
+    if (moodYou) moodYou.textContent = userName;
+    const moodThem = document.getElementById('moodThemName');
+    if (moodThem) moodThem.textContent = themName;
+    const thinkYou = document.getElementById('thinkingLabelYou');
+    if (thinkYou) thinkYou.textContent = userName + ' today';
+    const thinkThem = document.getElementById('thinkingLabelThem');
+    if (thinkThem) thinkThem.textContent = themName + ' today';
+    const letterTo = document.getElementById('letterRecipientName');
+    if (letterTo) letterTo.textContent = themName;
     letterRecipient = userKey === 'name1' ? 'name2' : 'name1'; // default to partner
 }

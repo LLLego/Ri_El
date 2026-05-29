@@ -94,7 +94,7 @@ function buildTimeline() {
                         <div class="card-gallery">
                             ${m.photos.map((p, pi) => `
                             <div class="card-gallery-item" style="--row-span: ${rowSpans[pi % rowSpans.length]}" onclick="openLightbox('${p.file.replace(/'/g, "\\'")}', '${p.caption.replace(/'/g, "\\'")}')">
-                                <img src="${p.file}" alt="${p.caption}" loading="lazy">
+                                <img src="${p.file}" alt="${p.caption}" loading="eager">
                                 <div class="card-gallery-caption">${p.caption}</div>
                             </div>`).join('')}
                         </div>` : ''}
@@ -198,3 +198,42 @@ function closeLightbox(event) {
 document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeLightbox({target: document.getElementById('lightbox')});
 });
+
+// Force-load all gallery images (fixes lazy loading not triggering for off-screen images)
+(function forceLoadGalleryImages() {
+    // Use IntersectionObserver with generous margin to preload images before they're visible
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const img = entry.target;
+            if (img.dataset.src) {
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+            }
+            observer.unobserve(img);
+        });
+    }, { rootMargin: '500px' });
+
+    // Process gallery images: move src to data-src and observe
+    const setupImages = () => {
+        document.querySelectorAll('.card-gallery-item img').forEach(img => {
+            if (img.src && !img.dataset.src) {
+                img.dataset.src = img.src;
+                img.src = '';
+                observer.observe(img);
+            }
+        });
+    };
+
+    // Run after timeline renders
+    if (document.readyState === 'complete') {
+        setTimeout(setupImages, 100);
+    } else {
+        window.addEventListener('load', () => setTimeout(setupImages, 100));
+    }
+
+    // Also watch for dynamically added images (if timeline re-renders)
+    const mutationObserver = new MutationObserver(() => {
+        setTimeout(setupImages, 100);
+    });
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
+})();

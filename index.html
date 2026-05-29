@@ -208,11 +208,22 @@
                     <button class="thinking-btn" id="thinkingBtn">&#9829;</button>
                 </div>
                 <div class="thinking-counts">
-              
+                    <div class="thinking-count-item">
+                        <span class="thinking-count-num" id="thinkingCountYou">0</span>
+                        <span class="thinking-count-label" id="thinkingLabelYou">You today</span>
+                    </div>
+                    <div class="thinking-count-divider">♥</div>
+                    <div class="thinking-count-item">
+                        <span class="thinking-count-num" id="thinkingCountThem">0</span>
+                        <span class="thinking-count-label" id="thinkingLabelThem">Them today</span>
+                    </div>
+                </div>
+            </div>
 
-... [OUTPUT TRUNCATED - 13303 chars omitted out of 63303 total] ...
-
-linecap="round"/><circle cx="130" cy="90" r="4" fill="#e8b84a" opacity="0.4"/><circle cx="390" cy="100" r="3" fill="#e8b84a" opacity="0.35"/></svg></div>
+            <!-- SEND SOME LOVE -->
+            <div class="together-card reveal-scale">
+                <div class="together-card-header">
+                    <div class="together-card-icon"><svg width="24" height="24" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="tcP" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#e8b84a" stop-opacity="0.12"/><stop offset="100%" stop-color="#e8b84a" stop-opacity="0"/></radialGradient></defs><circle cx="256" cy="256" r="200" fill="url(#tcP)"/><path d="M256 100 L290 200 L400 200 L310 260 L345 360 L256 300 L167 360 L202 260 L112 200 L222 200 Z" stroke="#e8b84a" stroke-width="16" stroke-linejoin="round" fill="none" stroke-linecap="round"/><circle cx="130" cy="90" r="4" fill="#e8b84a" opacity="0.4"/><circle cx="390" cy="100" r="3" fill="#e8b84a" opacity="0.35"/></svg></div>
                     <div>
                         <div class="together-card-title">Send Some Love</div>
                         <div class="together-card-subtitle">Quick pokes &amp; hugs that pop up on their screen</div>
@@ -239,6 +250,34 @@ linecap="round"/><circle cx="130" cy="90" r="4" fill="#e8b84a" opacity="0.4"/><c
                 <div class="poke-last-sent" id="pokeLastSent"></div>
             </div>
 
+            <!-- HOW WE FEEL -->
+            <div class="together-card reveal-scale">
+                <div class="together-card-header">
+                    <div class="together-card-icon">🌈</div>
+                    <div>
+                        <div class="together-card-title">How We Feel</div>
+                        <div class="together-card-subtitle">Set your mood so they know</div>
+                    </div>
+                </div>
+                <div class="mood-display">
+                    <div class="mood-person">
+                        <div class="mood-person-name" id="moodYouName">You</div>
+                        <div class="mood-emoji" id="moodYouEmoji">?</div>
+                        <div class="mood-label" id="moodYouLabel">Not set yet</div>
+                        <div class="mood-time" id="moodYouTime"></div>
+                    </div>
+                    <div class="mood-divider">💕</div>
+                    <div class="mood-person">
+                        <div class="mood-person-name" id="moodThemName">Them</div>
+                        <div class="mood-emoji" id="moodThemEmoji">?</div>
+                        <div class="mood-label" id="moodThemLabel">Waiting...</div>
+                        <div class="mood-time" id="moodThemTime"></div>
+                    </div>
+                </div>
+                <div class="mood-history-strip" id="moodHistoryStrip"></div>
+                <div class="mood-picker" id="moodPicker"></div>
+            </div>
+
             <!-- OUR DAY JOURNAL -->
             <div class="together-card reveal-scale" style="grid-column: 1 / -1;">
                 <div class="together-card-header">
@@ -261,6 +300,42 @@ linecap="round"/><circle cx="130" cy="90" r="4" fill="#e8b84a" opacity="0.4"/><c
                 </div>
             </div>
 
+            <!-- LOVE NOTES BOARD -->
+            <div class="together-card reveal-scale" style="grid-column: 1 / -1;">
+                <div class="together-card-header">
+                    <div class="together-card-icon">📝</div>
+                    <div>
+                        <div class="together-card-title">Love Notes Board</div>
+                        <div class="together-card-subtitle">Stick a note for your baby</div>
+                    </div>
+                </div>
+                <div class="notes-input-row">
+                    <input class="bucket-input" id="noteInput" placeholder="Write a little note..." maxlength="200">
+                    <button class="notes-send-btn" onclick="sendNote()">Stick</button>
+                </div>
+                <div class="notes-colors" id="noteColors"></div>
+                <div class="notes-grid" id="notesGrid"></div>
+            </div>
+
+            <!-- LOVE LETTERS -->
+            <div class="together-card reveal-scale">
+                <div class="together-card-header">
+                    <div class="together-card-icon">💌</div>
+                    <div>
+                        <div class="together-card-title">Love Letters</div>
+                        <div class="together-card-subtitle">Write from the heart</div>
+                    </div>
+                </div>
+                <div id="letterCompose" class="letter-compose">
+                    <div class="letter-recipient-row">
+                        To: <span id="letterRecipientName">Ansan</span>
+                        <button class="letter-toggle-btn" onclick="toggleLetterRecipient()">&#x21C4; Switch</button>
+                    </div>
+                    <textarea class="journal-textarea" id="letterTextarea" placeholder="My dearest..."></textarea>
+                    <button class="journal-save-btn" onclick="sendLetter()">💌 Seal &amp; Send</button>
+                </div>
+                <div class="letters-inbox" id="lettersInbox"></div>
+            </div>
 
             <!-- WHY I LOVE YOU WALL -->
             <div class="together-card reveal-scale" style="grid-column: 1 / -1;">
@@ -277,6 +352,22 @@ linecap="round"/><circle cx="130" cy="90" r="4" fill="#e8b84a" opacity="0.4"/><c
                 </div>
                 <div class="love-wall-grid" id="loveWallGrid"></div>
                 <button class="love-wall-shuffle-btn" onclick="shuffleLoveWall()">&#x1F3B2; Shuffle</button>
+            </div>
+
+            <!-- BUCKET LIST -->
+            <div class="together-card reveal-scale">
+                <div class="together-card-header">
+                    <div class="together-card-icon">🫣</div>
+                    <div>
+                        <div class="together-card-title">Our Bucket List</div>
+                        <div class="together-card-subtitle">Dreams to chase together</div>
+                    </div>
+                </div>
+                <div class="bucket-input-row">
+                    <input class="bucket-input" id="bucketInput" placeholder="Add a dream..." maxlength="100">
+                    <button class="notes-send-btn" onclick="addBucketItem()">Add</button>
+                </div>
+                <ul class="bucket-list" id="bucketList"></ul>
             </div>
 
             <!-- LOVE STATS -->
@@ -301,6 +392,23 @@ linecap="round"/><circle cx="130" cy="90" r="4" fill="#e8b84a" opacity="0.4"/><c
                     </div>
                 </div>
                 <div id="openWhenContent"></div>
+            </div>
+
+            <!-- MONTHSARY COUNTDOWN -->
+            <div class="together-card reveal-scale" style="grid-column: 1 / -1;">
+                <div class="together-card-header">
+                    <div class="together-card-icon">🎂</div>
+                    <div>
+                        <div class="together-card-title">Next Monthsary</div>
+                        <div class="together-card-subtitle" id="countdownDateLabel">Loading...</div>
+                    </div>
+                </div>
+                <div class="countdown-display">
+                    <div class="cd-unit"><span class="cd-num" id="cdDays">0</span><span class="cd-label">days</span></div>
+                    <div class="cd-unit"><span class="cd-num" id="cdHours">00</span><span class="cd-label">hours</span></div>
+                    <div class="cd-unit"><span class="cd-num" id="cdMinutes">00</span><span class="cd-label">min</span></div>
+                    <div class="cd-unit"><span class="cd-num" id="cdSeconds">00</span><span class="cd-label">sec</span></div>
+                </div>
             </div>
 
             <!-- Games Section -->
