@@ -14,36 +14,58 @@ function showNameError(msg) {
     el.style.display = 'block';
 }
 
+// ── Check which names have passwords set ──
+function checkRegisteredNames() {
+    if (!firebaseReady || !db || !roomId) return;
+    const authRef = db.ref(`rooms/${roomId}/auth`);
+    authRef.once('value', snap => {
+        const data = snap.val() || {};
+        const n1Registered = !!(data.name1 && data.name1.passHash);
+        const n2Registered = !!(data.name2 && data.name2.passHash);
+        // Update name cards with registration status
+        const card1 = document.getElementById('nameCard1');
+        const card2 = document.getElementById('nameCard2');
+        if (card1) {
+            const badge1 = card1.querySelector('.name-reg-badge');
+            if (badge1) {
+                badge1.textContent = n1Registered ? 'Registered' : 'First time';
+                badge1.className = 'name-reg-badge ' + (n1Registered ? 'registered' : 'new');
+            }
+        }
+        if (card2) {
+            const badge2 = card2.querySelector('.name-reg-badge');
+            if (badge2) {
+                badge2.textContent = n2Registered ? 'Registered' : 'First time';
+                badge2.className = 'name-reg-badge ' + (n2Registered ? 'registered' : 'new');
+            }
+        }
+    });
+}
+
 function initNameSystem() {
-    const saved = sessionStorage.getItem('re-authed-user');
-    if (saved) {
-        userName = saved;
-        document.getElementById('nameModal').classList.add('hidden');
-        resolveUserKey();
-        if (firebaseReady) initTogetherSync();
-        else initTogetherLocal();
-        return;
-    }
+    // ALWAYS show login modal — no sessionStorage bypass
     document.getElementById('nameModal').classList.remove('hidden');
     authStep = 'name';
     document.getElementById('nameStep').style.display = '';
     document.getElementById('passwordStep').style.display = 'none';
     document.getElementById('nameError').style.display = 'none';
+    // Check which names already have passwords
+    checkRegisteredNames();
 }
 
 function selectName(name) {
     pendingName = name;
     resolveUserKeyFromName(name);
     if (!userKey) {
-        showNameError("Hmm, that doesn't match~");
+        showNameError("Hmm, that doesn\'t match~");
         return;
     }
     if (!firebaseReady) {
         // No Firebase — just proceed
         userName = name;
-        sessionStorage.setItem('re-authed-user', name);
         document.getElementById('nameModal').classList.add('hidden');
         resolveUserKey();
+        showUserBadge();
         initTogetherLocal();
         return;
     }
@@ -51,7 +73,7 @@ function selectName(name) {
     authStep = 'password';
     document.getElementById('nameStep').style.display = 'none';
     document.getElementById('passwordStep').style.display = '';
-    document.getElementById('passwordTitle').textContent = 'Welcome back, ' + name + '! 💕';
+    document.getElementById('passwordTitle').textContent = 'Welcome, ' + name + '! 💕';
     document.getElementById('passwordSub').textContent = 'Whisper our secret~';
     document.getElementById('passwordHint').textContent = 'First time? Pick a password and it will be saved!';
     document.getElementById('passwordInput').value = '';
@@ -69,6 +91,7 @@ function backToNameStep() {
 async function submitPassword() {
     const pw = document.getElementById('passwordInput').value.trim();
     if (!pw) { showNameError('Please enter a password'); return; }
+    if (pw.length < 4) { showNameError('Password must be at least 4 characters'); return; }
     const hash = await hashPassword(pw);
     const authRef = db.ref(`rooms/${roomId}/auth/${userKey}`);
 
@@ -91,12 +114,36 @@ async function submitPassword() {
 
 function completeLogin(name) {
     userName = name;
-    sessionStorage.setItem('re-authed-user', name);
     document.getElementById('nameModal').classList.add('hidden');
     document.getElementById('nameError').style.display = 'none';
     resolveUserKey();
+    showUserBadge();
     if (firebaseReady) initTogetherSync();
     else initTogetherLocal();
+}
+
+// ── Show who's logged in ──
+function showUserBadge() {
+    const badge = document.getElementById('userBadge');
+    if (!badge) return;
+    const emoji = userKey === 'name1' ? '🦆' : '🐯';
+    badge.textContent = emoji + ' ' + userName;
+    badge.style.display = 'inline-flex';
+}
+
+function logout() {
+    sessionStorage.removeItem('re-authed-user');
+    userName = null;
+    userKey = null;
+    pendingName = null;
+    const badge = document.getElementById('userBadge');
+    if (badge) badge.style.display = 'none';
+    document.getElementById('nameModal').classList.remove('hidden');
+    authStep = 'name';
+    document.getElementById('nameStep').style.display = '';
+    document.getElementById('passwordStep').style.display = 'none';
+    document.getElementById('nameError').style.display = 'none';
+    checkRegisteredNames();
 }
 
 function resolveUserKeyFromName(name) {

@@ -55,6 +55,7 @@ window.wlDeleteItem = wlDeleteItem;
 window.wlPickRandom = wlPickRandom;
 window.selectName = selectName;
 window.backToNameStep = backToNameStep;
+window.logout = logout;
 window.addWheelItem = addWheelItem;
 window.removeWheelItem = removeWheelItem;
 window.spinWheel = spinWheel;
