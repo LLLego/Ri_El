@@ -18,7 +18,7 @@
             .theme-dot { width: 22px; height: 22px; }
             .hero-initials { font-size: clamp(3rem, 10vw, 5rem); }
             .song-wall { grid-template-columns: 1fr; }
-            .tab-nav { top: 48px; }
+            .tab-nav { top: 60px; }
             .tab-pill { padding: 5px 14px; font-size: 0.72rem; }
             .together-grid { grid-template-columns: 1fr; }
             .games-grid { grid-template-columns: repeat(2, 1fr); }

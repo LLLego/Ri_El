@@ -34,27 +34,33 @@ function initTypewriterLetters() {
 // =============================================
 function initFloatingDecorations() {
     const decoConfigs = [
-        { id: 'decoTigger',     size: 140, opacity: 0.15, zone: { xMin: 1,  xMax: 30, yMin: 5, yMax: 50 }, pos: { x: 5,  y: 85 }, anchor: 'bottom-left' },
-        { id: 'decoPucca',      size: 110, opacity: 0.15, zone: { xMin: 65, xMax: 95, yMin: 5, yMax: 50 }, pos: { x: 88, y: 15 }, anchor: 'top-right' },
-        { id: 'decoPoco',       size: 100, opacity: 0.14, zone: { xMin: 15, xMax: 45, yMin: 20, yMax: 70 }, pos: { x: 30, y: 50 }, anchor: 'center-left' },
-        { id: 'decoKuromi',     size: 90,  opacity: 0.13, zone: { xMin: 55, xMax: 85, yMin: 30, yMax: 80 }, pos: { x: 72, y: 55 }, anchor: 'center-right' },
-        { id: 'decoCinnamoroll', size: 95,  opacity: 0.14, zone: { xMin: 5,  xMax: 35, yMin: 40, yMax: 85 }, pos: { x: 18, y: 70 }, anchor: 'bottom-left' },
-        { id: 'decoHelloKitty', size: 85,  opacity: 0.13, zone: { xMin: 60, xMax: 90, yMin: 10, yMax: 55 }, pos: { x: 78, y: 30 }, anchor: 'top-right' },
-        { id: 'decoTotoro',     size: 120, opacity: 0.12, zone: { xMin: 35, xMax: 65, yMin: 15, yMax: 65 }, pos: { x: 50, y: 40 }, anchor: 'center' },
-        { id: 'decoOctopus',    size: 100, opacity: 0.14, zone: { xMin: 10, xMax: 40, yMin: 10, yMax: 55 }, pos: { x: 22, y: 25 }, anchor: 'top-left' },
-        { id: 'decoStar',       size: 80,  opacity: 0.15, zone: { xMin: 50, xMax: 80, yMin: 50, yMax: 90 }, pos: { x: 65, y: 75 }, anchor: 'bottom-right' },
-        { id: 'decoHeartWing',  size: 90,  opacity: 0.16, zone: { xMin: 30, xMax: 60, yMin: 5, yMax: 45 }, pos: { x: 45, y: 20 }, anchor: 'top-center' },
+        { id: 'decoTigger',     size: 140, opacity: 0.15, zone: { xMin: 1,  xMax: 30, yMin: 5, yMax: 50 }, pos: { x: 5,  y: 15 } },
+        { id: 'decoPucca',      size: 110, opacity: 0.15, zone: { xMin: 65, xMax: 95, yMin: 5, yMax: 50 }, pos: { x: 88, y: 15 } },
+        { id: 'decoPoco',       size: 100, opacity: 0.14, zone: { xMin: 15, xMax: 45, yMin: 20, yMax: 70 }, pos: { x: 30, y: 50 } },
+        { id: 'decoKuromi',     size: 90,  opacity: 0.13, zone: { xMin: 55, xMax: 85, yMin: 30, yMax: 80 }, pos: { x: 72, y: 55 } },
+        { id: 'decoCinnamoroll', size: 95,  opacity: 0.14, zone: { xMin: 5,  xMax: 35, yMin: 40, yMax: 85 }, pos: { x: 18, y: 70 } },
+        { id: 'decoHelloKitty', size: 85,  opacity: 0.13, zone: { xMin: 60, xMax: 90, yMin: 10, yMax: 55 }, pos: { x: 78, y: 30 } },
+        { id: 'decoTotoro',     size: 120, opacity: 0.12, zone: { xMin: 35, xMax: 65, yMin: 15, yMax: 65 }, pos: { x: 50, y: 40 } },
+        { id: 'decoOctopus',    size: 100, opacity: 0.14, zone: { xMin: 10, xMax: 40, yMin: 10, yMax: 55 }, pos: { x: 22, y: 25 } },
+        { id: 'decoStar',       size: 80,  opacity: 0.15, zone: { xMin: 50, xMax: 80, yMin: 50, yMax: 90 }, pos: { x: 65, y: 75 } },
+        { id: 'decoHeartWing',  size: 90,  opacity: 0.16, zone: { xMin: 30, xMax: 60, yMin: 5, yMax: 45 }, pos: { x: 45, y: 20 } },
     ];
+
+    const vpW = () => window.innerWidth;
+    const vpH = () => window.innerHeight;
 
     const items = decoConfigs.map(cfg => {
         const el = document.getElementById(cfg.id);
         if (!el) return null;
+        // Set static styles once — position via CSS top:0 left:0, movement via transform only
         el.style.width = cfg.size + 'px';
         el.style.opacity = cfg.opacity;
         el.style.position = 'fixed';
+        el.style.top = '0';
+        el.style.left = '0';
         el.style.pointerEvents = 'none';
         el.style.zIndex = '-1';
-        const { xMin, xMax, yMin, yMax } = cfg.zone;
+        el.style.willChange = 'transform';
         const speedMult = 0.7 + Math.random() * 0.6;
         return {
             el,
@@ -68,13 +74,14 @@ function initFloatingDecorations() {
             phaseY: Math.random() * Math.PI * 2,
             oscFreqX: 0.5 + Math.random() * 0.8,
             oscFreqY: 0.4 + Math.random() * 0.7,
-            anchor: cfg.anchor,
+            size: cfg.size,
         };
     }).filter(Boolean);
 
     let time = 0;
     function floatLoop() {
         time += 0.008;
+        const vw = vpW(), vh = vpH();
         items.forEach(item => {
             item.x += item.vx + Math.sin(time * item.oscFreqX + item.phaseX) * 0.004;
             item.y += item.vy + Math.cos(time * item.oscFreqY + item.phaseY) * 0.004;
@@ -83,34 +90,12 @@ function initFloatingDecorations() {
             if (item.y < yMin || item.y > yMax) item.vy *= -1;
             item.x = Math.max(xMin - 2, Math.min(xMax + 2, item.x));
             item.y = Math.max(yMin - 2, Math.min(yMax + 2, item.y));
+            // Convert viewport % to px offsets from top-left origin
+            const tx = (item.x / 100) * vw;
+            const ty = (item.y / 100) * vh;
             const rot = item.rotBase + Math.sin(time * item.rotSpeed) * 12;
-            if (item.anchor === 'bottom-left') {
-                item.el.style.bottom = `${100 - item.y}%`;
-                item.el.style.left = `${item.x}%`;
-                item.el.style.top = '';
-                item.el.style.right = '';
-            } else if (item.anchor === 'top-right') {
-                item.el.style.top = `${item.y}%`;
-                item.el.style.right = `${100 - item.x}%`;
-                item.el.style.bottom = '';
-                item.el.style.left = '';
-            } else if (item.anchor === 'center-right') {
-                item.el.style.top = `${item.y}%`;
-                item.el.style.left = `${item.x}%`;
-                item.el.style.bottom = '';
-                item.el.style.right = '';
-            } else if (item.anchor === 'bottom-right') {
-                item.el.style.bottom = `${100 - item.y}%`;
-                item.el.style.right = `${100 - item.x}%`;
-                item.el.style.top = '';
-                item.el.style.left = '';
-            } else {
-                item.el.style.top = `${item.y}%`;
-                item.el.style.left = `${item.x}%`;
-                item.el.style.bottom = '';
-                item.el.style.right = '';
-            }
-            item.el.style.transform = `rotate(${rot}deg)`;
+            // Only transform changes — GPU composited, no layout reflow
+            item.el.style.transform = `translate(${tx}px, ${ty}px) rotate(${rot}deg)`;
         });
         requestAnimationFrame(floatLoop);
     }
