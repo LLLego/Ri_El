@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>R&E · Our Love Story</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='44' fill='none' stroke='%23e8b84a' stroke-width='4'/%3E%3Cellipse cx='50' cy='50' rx='20' ry='44' fill='none' stroke='%23e8b84a' stroke-width='3'/%3E%3Cellipse cx='50' cy='50' rx='44' ry='20' fill='none' stroke='%23e8b84a' stroke-width='3'/%3E%3C/svg%3E">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&family=Dancing+Script:wght@400;600&family=Caveat:wght@400;500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Stylesheets -->
@@ -25,7 +26,15 @@
 <!-- ========== COUNTER BAR ========== -->
 <header class="counter-bar" id="counterBar">
     <div class="counter-bar-inner">
-        <div class="counter-logo" id="logoDisplay">R&amp;E</div>
+        <a class="site-logo" id="logoDisplay" href="#heroSection" aria-label="R&E · Our Love Story — back to top">
+            <svg class="site-logo-globe" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="2"/>
+                <ellipse cx="50" cy="50" rx="20" ry="46" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                <ellipse cx="50" cy="50" rx="46" ry="20" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                <line x1="50" y1="4" x2="50" y2="96" stroke="currentColor" stroke-width="1.6"/>
+            </svg>
+            <span class="site-logo-text">R&amp;E <span class="site-logo-sep" aria-hidden="true">·</span> <span class="site-logo-tagline">Our Love Story</span></span>
+        </a>
         <span class="user-badge" id="userBadge" style="display:none;" onclick="logout()" title="Click to logout"></span>
         <div class="counter-stats" id="counterStats">
             <div class="counter-stat">

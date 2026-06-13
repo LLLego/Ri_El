@@ -39,9 +39,52 @@
             max-width: var(--max-width); margin: 0 auto;
             display: flex; align-items: center; justify-content: space-between; width: 100%;
         }
-        .counter-logo {
-            font-family: 'Caveat', cursive; font-size: 1.5rem;
-            color: var(--accent-gold); user-select: none;
+        .site-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: var(--accent-gold);
+            text-decoration: none;
+            user-select: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+            white-space: nowrap;
+        }
+        .site-logo:hover {
+            color: var(--accent-warm);
+            transform: translateX(2px);
+        }
+        .site-logo-globe {
+            width: 30px;
+            height: 30px;
+            flex-shrink: 0;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .site-logo:hover .site-logo-globe {
+            transform: rotate(180deg);
+        }
+        .site-logo-text {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .site-logo-sep {
+            color: var(--accent-warm);
+            opacity: 0.5;
+            font-weight: 300;
+        }
+        .site-logo-tagline {
+            color: var(--text-secondary);
+            font-weight: 300;
+            font-size: 0.88rem;
+        }
+        @media (max-width: 720px) {
+            .site-logo-tagline,
+            .site-logo-sep { display: none; }
+            .site-logo { font-size: 1rem; }
         }
         .counter-stats {
             display: flex; gap: 24px; font-size: 0.8rem;
