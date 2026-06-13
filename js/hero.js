@@ -60,19 +60,19 @@ function initFloatingDecorations() {
     // Bumped opacity 0.13-0.16 → 0.20-0.30 so characters pop on
     // the dark background. New chibi characters added at the end.
     const decoConfigs = [
-        { id: 'decoTigger',       size: 150, opacity: 0.28, zone: { xMin: 2,  xMax: 32, yMin: 5, yMax: 55 }, pos: { x: 7,  y: 18 }, front: true },
-        { id: 'decoPucca',        size: 120, opacity: 0.28, zone: { xMin: 60, xMax: 96, yMin: 5, yMax: 50 }, pos: { x: 88, y: 14 }, front: true },
-        { id: 'decoPoco',         size: 105, opacity: 0.22, zone: { xMin: 15, xMax: 45, yMin: 20, yMax: 70 }, pos: { x: 30, y: 50 } },
-        { id: 'decoKuromi',       size: 95,  opacity: 0.20, zone: { xMin: 55, xMax: 85, yMin: 30, yMax: 80 }, pos: { x: 72, y: 55 } },
-        { id: 'decoCinnamoroll',  size: 100, opacity: 0.22, zone: { xMin: 5,  xMax: 35, yMin: 40, yMax: 85 }, pos: { x: 18, y: 70 } },
-        { id: 'decoHelloKitty',   size: 90,  opacity: 0.20, zone: { xMin: 60, xMax: 90, yMin: 10, yMax: 55 }, pos: { x: 78, y: 30 } },
-        { id: 'decoTotoro',       size: 130, opacity: 0.20, zone: { xMin: 35, xMax: 65, yMin: 15, yMax: 65 }, pos: { x: 50, y: 40 } },
-        { id: 'decoOctopus',      size: 105, opacity: 0.22, zone: { xMin: 10, xMax: 40, yMin: 10, yMax: 55 }, pos: { x: 22, y: 25 } },
-        { id: 'decoStar',         size: 85,  opacity: 0.24, zone: { xMin: 50, xMax: 80, yMin: 50, yMax: 90 }, pos: { x: 65, y: 75 } },
-        { id: 'decoHeartWing',    size: 95,  opacity: 0.24, zone: { xMin: 30, xMax: 60, yMin: 5, yMax: 45 }, pos: { x: 45, y: 20 } },
-        { id: 'decoChibiBatman',  size: 110, opacity: 0.25, zone: { xMin: 35, xMax: 75, yMin: 55, yMax: 95 }, pos: { x: 55, y: 70 } },
-        { id: 'decoChibiGhost',   size: 90,  opacity: 0.24, zone: { xMin: 8,  xMax: 38, yMin: 60, yMax: 95 }, pos: { x: 18, y: 82 } },
-        { id: 'decoChibiMoon',    size: 100, opacity: 0.25, zone: { xMin: 60, xMax: 92, yMin: 60, yMax: 95 }, pos: { x: 82, y: 78 }, front: true },
+        { id: 'decoTigger',       size: 150, opacity: 0.28, zone: { xMin: 2,  xMax: 32, yMin: 3,  yMax: 48 }, pos: { x: 7,  y: 16 }, front: true },
+        { id: 'decoPucca',        size: 120, opacity: 0.28, zone: { xMin: 60, xMax: 96, yMin: 3,  yMax: 45 }, pos: { x: 88, y: 12 }, front: true },
+        { id: 'decoPoco',         size: 105, opacity: 0.22, zone: { xMin: 15, xMax: 45, yMin: 18, yMax: 55 }, pos: { x: 30, y: 42 } },
+        { id: 'decoKuromi',       size: 95,  opacity: 0.20, zone: { xMin: 55, xMax: 85, yMin: 25, yMax: 58 }, pos: { x: 72, y: 48 } },
+        { id: 'decoCinnamoroll',  size: 100, opacity: 0.22, zone: { xMin: 5,  xMax: 35, yMin: 35, yMax: 62 }, pos: { x: 18, y: 58 } },
+        { id: 'decoHelloKitty',   size: 90,  opacity: 0.20, zone: { xMin: 60, xMax: 90, yMin: 8,  yMax: 50 }, pos: { x: 78, y: 26 } },
+        { id: 'decoTotoro',       size: 130, opacity: 0.20, zone: { xMin: 35, xMax: 65, yMin: 12, yMax: 52 }, pos: { x: 50, y: 35 } },
+        { id: 'decoOctopus',      size: 105, opacity: 0.22, zone: { xMin: 10, xMax: 40, yMin: 8,  yMax: 50 }, pos: { x: 22, y: 22 } },
+        { id: 'decoStar',         size: 85,  opacity: 0.24, zone: { xMin: 50, xMax: 80, yMin: 40, yMax: 65 }, pos: { x: 65, y: 55 } },
+        { id: 'decoHeartWing',    size: 95,  opacity: 0.24, zone: { xMin: 30, xMax: 60, yMin: 3,  yMax: 42 }, pos: { x: 45, y: 18 } },
+        { id: 'decoChibiBatman',  size: 110, opacity: 0.25, zone: { xMin: 35, xMax: 75, yMin: 40, yMax: 70 }, pos: { x: 55, y: 55 } },
+        { id: 'decoChibiGhost',   size: 90,  opacity: 0.24, zone: { xMin: 8,  xMax: 38, yMin: 45, yMax: 70 }, pos: { x: 18, y: 62 } },
+        { id: 'decoChibiMoon',    size: 100, opacity: 0.25, zone: { xMin: 60, xMax: 92, yMin: 42, yMax: 68 }, pos: { x: 82, y: 58 }, front: true },
     ];
 
     const vpW = () => window.innerWidth;
