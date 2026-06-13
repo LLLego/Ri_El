@@ -198,23 +198,29 @@ function saveOwLetter() {
 
 // =============================================
 // INIT — wires the Firebase listener for letters.
-// Without this, sendLetter() pushes to Firebase but
-// nothing re-renders, and openLetter() sets state but
-// nothing paints the opened view. Both are silent
-// failures. Called from app.js boot().
+// Called from boot() AND from the auth state callback
+// in firebase.js. Idempotent so a double-call is safe.
+// Without the auth-state hook, initLetters() runs at
+// boot when firebaseReady is still false → listener
+// never attaches → inbox stays empty → letters appear
+// "not openable."
 // =============================================
 let _lettersListenerAttached = false;
+let _lettersInitRetries = 0;
 function initLetters() {
     if (_lettersListenerAttached) return;
-    _lettersListenerAttached = true;
-    if (firebaseReady && roomId) {
+    if (firebaseReady && roomId && db) {
+        _lettersListenerAttached = true;
         db.ref(`rooms/${roomId}/letters`).on('value', snap => {
             const data = snap.val() || {};
             const letters = Object.entries(data).map(([id, l]) => ({ id, ...l }));
             renderLetters(letters);
         });
+    } else if (_lettersInitRetries++ < 40) {
+        // Firebase not ready yet — retry every 250ms (up to 10s)
+        setTimeout(initLetters, 250);
     } else {
-        // No Firebase — render whatever's in localStorage so the inbox isn't empty on first load
+        // Gave up on Firebase — fall back to localStorage so the inbox isn't empty
         renderLetters(getCurrentLetters());
     }
 }

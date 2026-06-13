@@ -108,17 +108,6 @@ function initFloatingDecorations() {
         };
     }).filter(Boolean);
 
-    // Fade the floating chars out once the hero scrolls out of view,
-    // so they stop painting on top of the timeline / Memory Vault.
-    // Together tab is handled separately by body.together-active (see polish.css).
-    const hero = document.getElementById('heroSection') || document.querySelector('.hero');
-    if (hero && 'IntersectionObserver' in window) {
-        const io = new IntersectionObserver(([entry]) => {
-            document.body.classList.toggle('hero-out', !entry.isIntersecting);
-        }, { threshold: 0.15 });
-        io.observe(hero);
-    }
-
     let time = 0;
     function floatLoop() {
         time += 0.008;

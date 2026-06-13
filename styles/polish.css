@@ -602,26 +602,6 @@
         }
 
         /* =============================================
-           FADE FLOATING CHARS OUT WHEN NOT ON HERO
-           The front-layer chars (Pucca, Tigger, Chibi Moon)
-           have z-index 10 — they'd otherwise paint on top
-           of the Together tab content and the timeline
-           bars. Two triggers kill them:
-             1. body.together-active  (Together tab open)
-             2. body.hero-out        (scrolled past the hero)
-           Smooth 0.5s fade so the disappearance feels
-           intentional, not a glitch.
-           ============================================= */
-        .floating-deco {
-            transition: opacity 0.5s ease;
-        }
-        body.together-active .floating-deco,
-        body.hero-out .floating-deco {
-            opacity: 0 !important;
-            pointer-events: none;
-        }
-
-        /* =============================================
            HERO ENTRANCE ANIMATION
            Title + subtitle + initials fade-up with a
            100ms stagger on first load. Plays once.
