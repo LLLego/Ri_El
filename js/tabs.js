@@ -16,6 +16,8 @@ function initTabs() {
             }
             // Show/hide theme switcher based on tab
             document.getElementById('themeSwitcher').style.display = pill.dataset.tab === 'story' ? '' : 'none';
+            // Show/hide Together dot nav via body class
+            document.body.classList.toggle('together-active', pill.dataset.tab === 'together');
         });
     });
 }

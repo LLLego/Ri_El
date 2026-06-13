@@ -580,3 +580,7 @@
         @media (prefers-reduced-motion: reduce) {
             .floating-deco { animation: none !important; }
         }
+        /* Dot nav: hide on mobile to avoid covering card content */
+        @media (max-width: 720px) {
+            .dot-nav { display: none !important; }
+        }
