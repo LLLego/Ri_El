@@ -81,14 +81,22 @@ function initFloatingDecorations() {
     const items = decoConfigs.map(cfg => {
         const el = document.getElementById(cfg.id);
         if (!el) return null;
-        // Set static styles once — position via CSS top:0 left:0, movement via transform only
-        el.style.width = cfg.size + 'px';
-        el.style.opacity = cfg.opacity;
-        el.style.position = 'fixed';
+        // CONTAINMENT FIX (June 13): was position: fixed at the BODY level
+        // with z-index 10, so the front chars (Pucca, Tigger, Chibi Moon)
+        // roamed the entire viewport and painted OVER the Together tab
+        // cards, the timeline, the Memory Vault, etc. Now we move them
+        // INTO the hero section as children, change to position: absolute,
+        // and lower the z-index. They roam WITHIN the hero's bounds only:
+        //   - Scrolling past the hero scrolls them out of view naturally
+        //   - Switching to Together tab hides the entire hero (display:none)
+        //     so the chars go with it — no more overlap with other content
+        //   - On the Our Story tab in the hero, they're still visible and
+        //     the front-layer ones still peek in front of the hero text
+        el.style.position = 'absolute';
         el.style.top = '0';
         el.style.left = '0';
         el.style.pointerEvents = 'none';
-        el.style.zIndex = cfg.front ? '10' : '-1';
+        el.style.zIndex = cfg.front ? '3' : '1';   // 3 = above hero-content (z=2), 1 = below
         el.style.willChange = 'transform';
         if (cfg.front) el.classList.add('front');
         const speedMult = 0.7 + Math.random() * 0.6;
@@ -107,6 +115,19 @@ function initFloatingDecorations() {
             size: cfg.size,
         };
     }).filter(Boolean);
+
+    // Move the decorations INTO the hero section so they're contained
+    // by it. We do this in JS (not HTML) so the page source stays clean
+    // and the decorations logically belong to the floating-decoration
+    // subsystem, not the hero markup.
+    const heroSection = document.getElementById('heroSection') || document.querySelector('.hero');
+    if (heroSection) {
+        items.forEach(item => {
+            if (item.el.parentElement !== heroSection) {
+                heroSection.appendChild(item.el);
+            }
+        });
+    }
 
     let time = 0;
     function floatLoop() {

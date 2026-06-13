@@ -1,6 +1,11 @@
 // --- Love Letters ---
 // letterRecipient declared in state.js
 
+// Local cache of the latest letters data. Maintained by the Firebase
+// listener and used by openLetter() / renderLetters() so the open flow
+// doesn't depend on the listener re-firing after a Firebase write.
+let currentLetters = [];
+
 function toggleLetterRecipient() {
     letterRecipient = letterRecipient === 'name1' ? 'name2' : 'name1';
     document.getElementById('letterRecipientName').textContent = letterRecipient === 'name1' ? DATA.couple.name1 : DATA.couple.name2;
@@ -22,7 +27,8 @@ function sendLetter() {
             const letters = JSON.parse(localStorage.getItem('re-letters') || '[]');
             letters.unshift(letter);
             saveLocal('re-letters', letters);
-            renderLetters(letters);
+            currentLetters = letters;
+            renderLetters(currentLetters);
         }
         textarea.value = '';
         compose.classList.remove('letter-sealing');
@@ -30,14 +36,17 @@ function sendLetter() {
 }
 
 function markLetterRead(id) {
-    if (firebaseReady) {
+    if (firebaseReady && roomId) {
         db.ref(`rooms/${roomId}/letters/${id}/read`).set(true);
     } else {
         const letters = JSON.parse(localStorage.getItem('re-letters') || '[]');
-        const idx = parseInt(id);
-        if (letters[idx]) letters[idx].read = true;
-        saveLocal('re-letters', letters);
-        renderLetters(letters);
+        const idx = parseInt(id, 10);
+        if (!isNaN(idx) && letters[idx]) {
+            letters[idx].read = true;
+            saveLocal('re-letters', letters);
+            currentLetters = letters;
+            renderLetters(currentLetters);
+        }
     }
 }
 
@@ -49,7 +58,7 @@ function renderLetters(letters) {
         const letter = letters.find((l, i) => (l.id || i.toString()) === openedLetter);
         if (letter) {
             inbox.innerHTML = `
-                <button class="letter-back-btn" onclick="openedLetter=null;renderLetters(getCurrentLetters())">&larr; Back to inbox</button>
+                <button class="letter-back-btn" onclick="closeLetter()">&larr; Back to inbox</button>
                 <div class="letter-opened">
                     <div class="letter-opened-text">${escapeHtml(letter.text)}</div>
                     <div class="letter-opened-from">With love, ${escapeHtml(letter.from)}</div>
@@ -79,19 +88,22 @@ function renderLetters(letters) {
     }).join('');
 }
 
-function getCurrentLetters() {
-    return JSON.parse(localStorage.getItem('re-letters') || '[]');
-}
-
 function openLetter(id) {
     markLetterRead(id);
     openedLetter = id;
-    if (firebaseReady) {
-        // Re-render will happen via listener
-    } else {
-        renderLetters(getCurrentLetters());
-    }
+    // CRITICAL: render directly from our local cache. Don't rely on
+    // the Firebase listener to fire after markLetterRead — if the
+    // listener doesn't fire (db null, race, etc.) the open view never
+    // shows and the user sees "I can't open letters." The cache is
+    // already populated by the listener, so this just renders it.
+    renderLetters(currentLetters);
 }
+
+function closeLetter() {
+    openedLetter = null;
+    renderLetters(currentLetters);
+}
+window.closeLetter = closeLetter;
 
 // =============================================
 // OPEN WHEN LETTERS
@@ -214,14 +226,17 @@ function initLetters() {
         db.ref(`rooms/${roomId}/letters`).on('value', snap => {
             const data = snap.val() || {};
             const letters = Object.entries(data).map(([id, l]) => ({ id, ...l }));
-            renderLetters(letters);
+            currentLetters = letters;
+            renderLetters(currentLetters);
         });
     } else if (_lettersInitRetries++ < 40) {
         // Firebase not ready yet — retry every 250ms (up to 10s)
         setTimeout(initLetters, 250);
     } else {
         // Gave up on Firebase — fall back to localStorage so the inbox isn't empty
-        renderLetters(getCurrentLetters());
+        const local = JSON.parse(localStorage.getItem('re-letters') || '[]');
+        currentLetters = local;
+        renderLetters(currentLetters);
     }
 }
 window.initLetters = initLetters;
