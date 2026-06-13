@@ -303,6 +303,48 @@
         "Try a new restaurant",
         "Write each other letters"
       ]
+    },
+    {
+      "number": 3,
+      "date": "2026-06-14",
+      "theme": "purple",
+      "title": "Happy 16th Monthsary Baby",
+      "subtitle": "A year and 4 months of love and adventure",
+      "letter": "To my Baby, Ansan, Lablab, Riri, Baobao. I want you to know that I love you, as much as I always say this. It still feels different when I write it out with the thoughts from my heart. Baby, I want to thank you for everything. Legitimately, for everything. You have made my life better, not just in being there for me, but also in improving myself as a better person. I want to thank you for this because it isn't a small matter, but a big one for me at least. I love you baby, I hope we'll continue to love each other until the forever and the end my love. MWAH MWAH CHUP CHUP!!!",
+      "photos": [
+        { "file": "images/16th/Messenger_creation_019A2C85-A325-4E18-8C7C-763F64E96C2A.jpeg", "caption": "CUTE MO SOBRA, MWA! 💋" },
+        { "file": "images/16th/Messenger_creation_0F5E5E54-9473-43CC-8807-4EDEE8F1B25B.jpeg", "caption": "KAHIT GABI, IKAW PA RIN 🌙" },
+        { "file": "images/16th/Messenger_creation_22F572CE-98E4-4BE2-9A78-6E1132FF8BA5.jpeg", "caption": "BEARY HAPPY MONTHSARY 🐻" },
+        { "file": "images/16th/Messenger_creation_25A7266A-83F5-408F-879C-752FC3130EE7.jpeg", "caption": "BEAR HUGS & KILIG 🧸" },
+        { "file": "images/16th/Messenger_creation_3B8F2EC9-1DD0-4B39-8C7A-4F66CD8EA818.jpeg", "caption": "ULAN MAN O ARAW, IKAW PA RIN ☔" },
+        { "file": "images/16th/Messenger_creation_5389EC19-2FA4-4A5D-A512-0548B084F29B.jpeg", "caption": "CUTIE PIE + ME = US 💕" },
+        { "file": "images/16th/Messenger_creation_5A6C6179-8370-4116-8F2C-80F0172F6948.jpeg", "caption": "MY FAVORITE NOTIFICATION ❤️" },
+        { "file": "images/16th/Messenger_creation_8A9DFE8A-5976-4732-9374-6DAEC7E86588.jpeg", "caption": "MY FAVORITE PERSON, ALWAYS 💖" },
+        { "file": "images/16th/Messenger_creation_A6EB9131-44D2-4B14-81B3-8FC3A85B194E.jpeg", "caption": "PUSSO BEAR MONTHSARY 🐻💗" },
+        { "file": "images/16th/Messenger_creation_B4AF6112-FB72-4C03-BF16-A55AD24B6F33.jpeg", "caption": "MONTHSARY WITH MY BES 💕" },
+        { "file": "images/16th/Messenger_creation_B5FFE0DB-84C2-46B6-BCF0-4AC5317088B0.jpeg", "caption": "MY UMBRELLA GIRL 🌧️" },
+        { "file": "images/16th/Messenger_creation_DA465292-9DFB-4578-9A98-F6BDA2DF20B6.jpeg", "caption": "9 WAYS TO SAY I LOVE U 🌟" },
+        { "file": "images/16th/Messenger_creation_DFECC376-7172-4B60-AA98-61EFAF473908.jpeg", "caption": "LDR BABY 🫶" }
+      ],
+      "songs": [
+        { "file": "music/howl.mp3", "title": "Howl", "artist": "Joe Hisaishi" },
+        { "file": "music/snowspring.mp3", "title": "Spring Snow", "artist": "10CM" },
+        { "file": "music/riskitall.mp3", "title": "Risk It All", "artist": "Bruno Mars" }
+      ],
+      "dreams_life": [
+        "Get a pet together",
+        "Cook a full meal from scratch",
+        "Learn something new together",
+        "Build our home library",
+        "Grow old together, still laughing"
+      ],
+      "dreams_month": [
+        "Go on a picnic together",
+        "Watch the sunset somewhere beautiful",
+        "Take new photos together",
+        "Try a new restaurant",
+        "Write each other letters"
+      ]
     }
   ],
   "quotes": [
