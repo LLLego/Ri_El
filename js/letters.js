@@ -195,3 +195,27 @@ function saveOwLetter() {
     }
     textarea.value = '';
 }
+
+// =============================================
+// INIT — wires the Firebase listener for letters.
+// Without this, sendLetter() pushes to Firebase but
+// nothing re-renders, and openLetter() sets state but
+// nothing paints the opened view. Both are silent
+// failures. Called from app.js boot().
+// =============================================
+let _lettersListenerAttached = false;
+function initLetters() {
+    if (_lettersListenerAttached) return;
+    _lettersListenerAttached = true;
+    if (firebaseReady && roomId) {
+        db.ref(`rooms/${roomId}/letters`).on('value', snap => {
+            const data = snap.val() || {};
+            const letters = Object.entries(data).map(([id, l]) => ({ id, ...l }));
+            renderLetters(letters);
+        });
+    } else {
+        // No Firebase — render whatever's in localStorage so the inbox isn't empty on first load
+        renderLetters(getCurrentLetters());
+    }
+}
+window.initLetters = initLetters;
