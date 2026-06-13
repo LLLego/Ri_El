@@ -109,6 +109,7 @@
         .together-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
+            align-items: start;       /* cards don't stretch — gaps appear below, not inside */
             gap: 24px; padding: 20px 0 60px;
         }
         @media (max-width: 720px) {
