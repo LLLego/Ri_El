@@ -141,6 +141,8 @@
             <div class="hero-line"></div>
         </div>
         <div class="hero-love-note">made with love for my baby ♡</div>
+        <div class="hero-monthsary-pills" id="heroMonthsaryPills" aria-label="Jump to monthsary"></div>
+        <div class="hero-see-more-label">scroll for our story</div>
         <div class="hero-see-more" onclick="document.getElementById('timelineStart').scrollIntoView({behavior:'smooth'})">&#8964;</div>
     </section>
 
@@ -227,6 +229,13 @@
             <div id="amUnlockDateField" class="vm-conditional" style="display:none;">
                 <label class="vm-label">Unlock date</label>
                 <input type="date" id="amUnlockDate" class="vm-input" />
+            </div>
+
+            <div id="amMutualInfo" class="vm-conditional vm-mutual-info" style="display:none;">
+                <div class="vm-mutual-icon">🤝</div>
+                <div class="vm-mutual-text">
+                    <strong>Twin Letters.</strong> Both of you need to write your part before this capsule unlocks. Once you both submit, you'll see each other's messages side by side.
+                </div>
             </div>
 
             <p id="amError" class="vm-error" style="display:none;"></p>

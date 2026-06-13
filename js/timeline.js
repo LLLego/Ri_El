@@ -37,6 +37,35 @@ function ordinal(n) {
     return n + (s[(v-20)%10] || s[v] || s[0]);
 }
 
+// =============================================
+// BUILD HERO MONTHSARY JUMP PILLS
+// Small chips in the hero that link to each monthsary
+// card, so the user can jump straight to a specific
+// entry without scrolling. The newest gets a ✨ accent.
+// =============================================
+function buildHeroMonthsaryPills(monthsaries) {
+    const pills = document.getElementById('heroMonthsaryPills');
+    if (!pills) return;
+    if (!monthsaries || !monthsaries.length) {
+        pills.style.display = 'none';
+        return;
+    }
+    const newestNum = Math.max(...monthsaries.map(m => m.number || 0));
+    pills.innerHTML = monthsaries.map((m, i) => {
+        const num = m.number || (i + 1);
+        const isNewest = num === newestNum;
+        return `<a class="hero-monthsary-pill${isNewest ? ' is-newest' : ''}" href="#month-${num}" data-delay="${i * 80}">
+            <span class="hero-monthsary-pill-num">${num}</span>Monthsary
+        </a>`;
+    }).join('');
+    // Stagger the fade-in so they don't all pop in at once
+    requestAnimationFrame(() => {
+        Array.from(pills.children).forEach((pill, i) => {
+            setTimeout(() => pill.classList.add('loaded'), i * 80);
+        });
+    });
+}
+
 function formatDate(dateStr) {
     const d = new Date(dateStr + 'T12:00:00');
     return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
@@ -47,6 +76,9 @@ function buildTimeline() {
     const milestones = (DATA.milestones || []).map(m => ({...m, type: 'milestone'}));
     const monthsaries = (DATA.monthsaries || []).map(m => ({...m, type: 'monthsary'}));
     const quotes = (DATA.quotes || []).map(q => ({text: q, type: 'quote', date: '2025-07-01'}));
+
+    // Populate the hero monthsary jump pills
+    buildHeroMonthsaryPills(monthsaries);
 
     // Merge all entries and sort by date
     const all = [...milestones, ...monthsaries].sort((a, b) => new Date(a.date) - new Date(b.date));
@@ -66,6 +98,7 @@ function buildTimeline() {
     merged.forEach((item, idx) => {
         const entry = document.createElement('div');
         entry.className = 'timeline-entry reveal';
+        if (item.type === 'monthsary' && item.number) entry.id = 'month-' + item.number;
         entry.style.transitionDelay = (idx * 0.08) + 's';
 
         const marker = document.createElement('div');

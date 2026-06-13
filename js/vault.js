@@ -301,6 +301,8 @@ function setVaultSeal(s) {
     document.querySelectorAll('input[name="amSeal"]').forEach(r => { r.checked = (r.value === s); });
     const ud = document.getElementById('amUnlockDateField');
     if (ud) ud.style.display = s === 'time-locked' ? '' : 'none';
+    const mi = document.getElementById('amMutualInfo');
+    if (mi) mi.style.display = s === 'mutual-unlock' ? 'flex' : 'none';
 }
 
 function submitAddMemory() {
@@ -345,7 +347,7 @@ function submitAddMemory() {
         mutualContributions: seal === 'mutual-unlock' ? { [myKey]: body } : null
     };
 
-    if (firebaseReady && roomId) {
+    if (firebaseReady && roomId && db) {
         db.ref('rooms/' + roomId + '/vault').push(mem);
     } else {
         const id = 'm_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7);
