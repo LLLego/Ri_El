@@ -1,46 +1,34 @@
 // =============================================
 // VOICE NOTES
 // =============================================
-// ⚠️  STATUS (June 13 2026): BROKEN ON THE LIVE SITE.
-//     The UI for this feature (vnSection, vnRecordBtn, vnList) lives
-//     only in index_backup.html — it was lost during the May 29
-//     monolith split. The JS loads silently and the functions all
-//     no-op because their target elements don't exist in the
-//     current index.html.
+// ⚠️  STATUS (June 13 2026): FEATURE PAUSED.
+//     Two blockers — neither is fixable in scope right now:
 //
-//     ALSO: the current data model stores audio as base64 in
-//     Firebase Realtime Database at `rooms/{rid}/voiceNotes/{id}`.
-//     This is the WRONG architecture for audio — base64 inflates
-//     the data ~33%, RTDB charges per GB downloaded, and the
-//     30-second cap exists only as a UX guard. Real fix path:
+//     1. UI is missing from the current index.html. The
+//        recording UI (vnSection, vnRecordBtn, vnList) was
+//        lost during the May 29 monolith split. It only
+//        exists in index_backup.html lines ~2843-2900. The
+//        JS loads silently and every function no-ops.
 //
-//       1. Upgrade Firebase project to Blaze (pay-as-you-go; the
-//          free tier covers personal couple use).
-//       2. Enable Firebase Storage on the project.
-//       3. Replace `audio: base64` with a Storage upload:
-//            const file = new Blob(vnChunks, {type: 'audio/webm'});
-//            const path = `rooms/${roomId}/voiceNotes/${uid}.webm`;
-//            const snap = await firebase.storage().ref(path).put(file);
-//            const audioUrl = await snap.ref.getDownloadURL();
-//            db.ref(`rooms/${roomId}/voiceNotes/${uid}`).set({
-//              sender, senderKey, audioUrl, duration, timestamp
-//            });
-//       4. In vnPlayNote, swap `new Audio(audioData)` for
-//          `new Audio(audioUrl)`. Free CDN-served playback, no
-//          RTDB bandwidth cost.
-//       5. Restore the UI from index_backup.html (lines ~2843-2900)
-//          into index.html inside #tab-together, after the existing
-//          voice-note-related sections.
+//     2. Even if the UI were restored, the data model is
+//        the wrong architecture for audio. base64 in
+//        Realtime Database inflates payload ~33% and
+//        RTDB charges per GB downloaded. The right home
+//        for audio is Firebase Storage, which requires
+//        the Blaze (pay-as-you-go) plan — not in budget
+//        right now.
 //
-//     Until then, the size-limit guard below prevents the worst
-//     failure mode (recording works locally, then crashes the
-//     write when the base64 string is several MB).
+//     So: feature stays dormant. The size guard below
+//     is a defensive measure for the day someone DOES
+//     restore the UI and wants to use the local-only
+//     path with a 5-second cap. Better than nothing.
 // =============================================
 
-// Max audio size we accept (in base64 chars; ~0.75 MB decoded).
-// Above this, RTDB costs spike and the write may fail. The right
-// long-term answer is Firebase Storage (see comment above).
-const VN_MAX_BASE64_CHARS = 1_000_000;   // ~750 KB of audio at opus 32kbps ≈ ~3 min
+// Max audio size we'll accept if the UI is ever restored.
+// Without Firebase Storage, base64 in RTDB is the only option,
+// and we want to keep the write small enough to not blow the
+// free tier.
+const VN_MAX_BASE64_CHARS = 350_000;   // ~260 KB of audio ≈ ~5s of opus
 
 // vnRecording declared in state.js
 // vnMediaRecorder declared in state.js

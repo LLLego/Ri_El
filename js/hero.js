@@ -56,17 +56,23 @@ function initTypewriterLetters() {
 // FLOATING DECORATIONS
 // =============================================
 function initFloatingDecorations() {
+    // front: true = rendered IN FRONT of the hero (z-index 10).
+    // Bumped opacity 0.13-0.16 → 0.20-0.30 so characters pop on
+    // the dark background. New chibi characters added at the end.
     const decoConfigs = [
-        { id: 'decoTigger',     size: 140, opacity: 0.15, zone: { xMin: 1,  xMax: 30, yMin: 5, yMax: 50 }, pos: { x: 5,  y: 15 } },
-        { id: 'decoPucca',      size: 110, opacity: 0.15, zone: { xMin: 65, xMax: 95, yMin: 5, yMax: 50 }, pos: { x: 88, y: 15 } },
-        { id: 'decoPoco',       size: 100, opacity: 0.14, zone: { xMin: 15, xMax: 45, yMin: 20, yMax: 70 }, pos: { x: 30, y: 50 } },
-        { id: 'decoKuromi',     size: 90,  opacity: 0.13, zone: { xMin: 55, xMax: 85, yMin: 30, yMax: 80 }, pos: { x: 72, y: 55 } },
-        { id: 'decoCinnamoroll', size: 95,  opacity: 0.14, zone: { xMin: 5,  xMax: 35, yMin: 40, yMax: 85 }, pos: { x: 18, y: 70 } },
-        { id: 'decoHelloKitty', size: 85,  opacity: 0.13, zone: { xMin: 60, xMax: 90, yMin: 10, yMax: 55 }, pos: { x: 78, y: 30 } },
-        { id: 'decoTotoro',     size: 120, opacity: 0.12, zone: { xMin: 35, xMax: 65, yMin: 15, yMax: 65 }, pos: { x: 50, y: 40 } },
-        { id: 'decoOctopus',    size: 100, opacity: 0.14, zone: { xMin: 10, xMax: 40, yMin: 10, yMax: 55 }, pos: { x: 22, y: 25 } },
-        { id: 'decoStar',       size: 80,  opacity: 0.15, zone: { xMin: 50, xMax: 80, yMin: 50, yMax: 90 }, pos: { x: 65, y: 75 } },
-        { id: 'decoHeartWing',  size: 90,  opacity: 0.16, zone: { xMin: 30, xMax: 60, yMin: 5, yMax: 45 }, pos: { x: 45, y: 20 } },
+        { id: 'decoTigger',       size: 150, opacity: 0.28, zone: { xMin: 2,  xMax: 32, yMin: 5, yMax: 55 }, pos: { x: 7,  y: 18 }, front: true },
+        { id: 'decoPucca',        size: 120, opacity: 0.28, zone: { xMin: 60, xMax: 96, yMin: 5, yMax: 50 }, pos: { x: 88, y: 14 }, front: true },
+        { id: 'decoPoco',         size: 105, opacity: 0.22, zone: { xMin: 15, xMax: 45, yMin: 20, yMax: 70 }, pos: { x: 30, y: 50 } },
+        { id: 'decoKuromi',       size: 95,  opacity: 0.20, zone: { xMin: 55, xMax: 85, yMin: 30, yMax: 80 }, pos: { x: 72, y: 55 } },
+        { id: 'decoCinnamoroll',  size: 100, opacity: 0.22, zone: { xMin: 5,  xMax: 35, yMin: 40, yMax: 85 }, pos: { x: 18, y: 70 } },
+        { id: 'decoHelloKitty',   size: 90,  opacity: 0.20, zone: { xMin: 60, xMax: 90, yMin: 10, yMax: 55 }, pos: { x: 78, y: 30 } },
+        { id: 'decoTotoro',       size: 130, opacity: 0.20, zone: { xMin: 35, xMax: 65, yMin: 15, yMax: 65 }, pos: { x: 50, y: 40 } },
+        { id: 'decoOctopus',      size: 105, opacity: 0.22, zone: { xMin: 10, xMax: 40, yMin: 10, yMax: 55 }, pos: { x: 22, y: 25 } },
+        { id: 'decoStar',         size: 85,  opacity: 0.24, zone: { xMin: 50, xMax: 80, yMin: 50, yMax: 90 }, pos: { x: 65, y: 75 } },
+        { id: 'decoHeartWing',    size: 95,  opacity: 0.24, zone: { xMin: 30, xMax: 60, yMin: 5, yMax: 45 }, pos: { x: 45, y: 20 } },
+        { id: 'decoChibiBatman',  size: 110, opacity: 0.25, zone: { xMin: 35, xMax: 75, yMin: 55, yMax: 95 }, pos: { x: 55, y: 70 } },
+        { id: 'decoChibiGhost',   size: 90,  opacity: 0.24, zone: { xMin: 8,  xMax: 38, yMin: 60, yMax: 95 }, pos: { x: 18, y: 82 } },
+        { id: 'decoChibiMoon',    size: 100, opacity: 0.25, zone: { xMin: 60, xMax: 92, yMin: 60, yMax: 95 }, pos: { x: 82, y: 78 }, front: true },
     ];
 
     const vpW = () => window.innerWidth;
@@ -82,8 +88,9 @@ function initFloatingDecorations() {
         el.style.top = '0';
         el.style.left = '0';
         el.style.pointerEvents = 'none';
-        el.style.zIndex = '-1';
+        el.style.zIndex = cfg.front ? '10' : '-1';
         el.style.willChange = 'transform';
+        if (cfg.front) el.classList.add('front');
         const speedMult = 0.7 + Math.random() * 0.6;
         return {
             el,
