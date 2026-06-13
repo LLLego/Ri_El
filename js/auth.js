@@ -114,7 +114,13 @@ async function submitPassword() {
 
 function completeLogin(name) {
     userName = name;
-    document.getElementById('nameModal').classList.add('hidden');
+    // Heart-burst confetti from the submit button — fires once per page-load
+    burstHearts(document.getElementById('nameSubmitBtn'));
+    // Native View Transition cross-fade for the modal → hero reveal
+    startViewTransition(() => {
+        document.getElementById('nameModal').classList.add('hidden');
+    });
+    // userBadge etc. are still applied below, outside the transition
     document.getElementById('nameError').style.display = 'none';
     resolveUserKey();
     showUserBadge();

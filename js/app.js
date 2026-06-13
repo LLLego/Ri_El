@@ -85,6 +85,7 @@ function boot() {
     try { initTypewriterLetters(); } catch(e) { console.warn('initTypewriterLetters:', e); }
     try { initTabs(); } catch(e) { console.warn('initTabs:', e); }
     try { initScrollTop(); } catch(e) { console.warn('initScrollTop:', e); }
+    try { initVault(); } catch(e) { console.warn('initVault:', e); }
     // initNameSystem is called after Firebase auth resolves (see initFirebase)
     try { initFirebase(); } catch(e) { console.warn('initFirebase:', e); }
 

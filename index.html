@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="styles/together.css">
     <link rel="stylesheet" href="styles/games.css">
     <link rel="stylesheet" href="styles/responsive.css">
+    <link rel="stylesheet" href="styles/polish.css">
 
     <!-- Firebase SDK (loaded with defer) -->
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js" defer></script>
@@ -143,6 +144,86 @@
             <div class="timeline" id="timelineContainer"></div>
         </div>
     </section>
+
+    <!-- MEMORY VAULT -->
+    <section id="memoryVaultSection" class="reveal">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Our Curated Moments</p>
+                <h2 class="section-title">Memory Vault</h2>
+            </div>
+
+            <!-- On This Day plaque (hidden by JS if no match) -->
+            <div id="onThisDayCard" class="on-this-day-wrap" style="display:none;"></div>
+
+            <!-- Vault grid -->
+            <div class="vault-grid" id="vaultGrid"></div>
+
+            <!-- Desktop add button -->
+            <div class="vault-add-desktop">
+                <button class="vault-add-btn" onclick="openAddMemory()">+ Add Memory</button>
+            </div>
+        </div>
+
+        <!-- Mobile FAB -->
+        <button class="vault-add-fab" id="vaultAddFab" aria-label="Add Memory">+</button>
+    </section>
+
+    <!-- Add Memory Modal -->
+    <div class="vault-modal-overlay hidden" id="addMemoryModal">
+        <div class="vault-modal">
+            <button class="vm-close" onclick="closeMemoryModal()" aria-label="Close">&times;</button>
+            <h3 class="vm-modal-title">Place a memory in the vault</h3>
+            <p class="vm-modal-sub">A little moment, a sealed capsule, or a dream to come true</p>
+
+            <label class="vm-label">Title</label>
+            <input type="text" id="amTitle" class="vm-input" maxlength="100" placeholder="Our first kiss at the rooftop…" />
+
+            <label class="vm-label">Date</label>
+            <input type="date" id="amDate" class="vm-input" />
+
+            <label class="vm-label">Body</label>
+            <textarea id="amBody" class="vm-textarea" maxlength="2000" placeholder="Write the moment, the feeling, the words you want to keep…"></textarea>
+
+            <label class="vm-label">Photo path <span class="vm-optional">(optional)</span></label>
+            <input type="text" id="amPhoto" class="vm-input" placeholder="images/vault/your-photo.jpg" />
+
+            <label class="vm-label">Category</label>
+            <select id="amCategory" class="vm-input">
+                <option value="milestone">🏆 Milestone</option>
+                <option value="monthsary">💕 Monthsary</option>
+                <option value="quote">💬 Quote</option>
+                <option value="dream">✨ Dream</option>
+                <option value="song">🎵 Song</option>
+                <option value="moment">📸 Moment</option>
+                <option value="custom">💎 Custom</option>
+            </select>
+
+            <label class="vm-label">Sealing</label>
+            <div class="vm-radio-row">
+                <label class="vm-radio"><input type="radio" name="amSeal" value="none" checked onchange="setVaultSeal('none')"/> <span>Open</span></label>
+                <label class="vm-radio"><input type="radio" name="amSeal" value="time-locked" onchange="setVaultSeal('time-locked')"/> <span>🔒 Time-Locked</span></label>
+                <label class="vm-radio"><input type="radio" name="amSeal" value="mutual-unlock" onchange="setVaultSeal('mutual-unlock')"/> <span>🤝 Mutual Unlock</span></label>
+            </div>
+
+            <div id="amUnlockDateField" class="vm-conditional" style="display:none;">
+                <label class="vm-label">Unlock date</label>
+                <input type="date" id="amUnlockDate" class="vm-input" />
+            </div>
+
+            <p id="amError" class="vm-error" style="display:none;"></p>
+
+            <div class="vm-actions">
+                <button class="vm-cancel" onclick="closeMemoryModal()">Cancel</button>
+                <button class="vm-submit" onclick="submitAddMemory()">Place in vault</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Memory Modal -->
+    <div class="vault-modal-overlay hidden" id="viewMemoryModal">
+        <div class="vault-modal" id="vmContent"></div>
+    </div>
 
     <!-- SONG WALL -->
     <section id="songWallSection" class="reveal">
@@ -548,6 +629,7 @@
     <script defer src="js/utils.js"></script>
     <script defer src="js/firebase.js"></script>
     <script defer src="js/auth.js"></script>
+    <script defer src="js/opening.js"></script>
     <script defer src="js/theme.js"></script>
     <script defer src="js/tabs.js"></script>
 
@@ -565,6 +647,7 @@
     <script defer src="js/letters.js"></script>
     <script defer src="js/notes.js"></script>
     <script defer src="js/together.js"></script>
+    <script defer src="js/vault.js"></script>
 
     <!-- Games -->
     <script defer src="js/games/index.js"></script>

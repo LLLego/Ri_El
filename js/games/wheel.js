@@ -23,6 +23,18 @@ function renderWheel(container) {
             </div>
         </div>
     `;
+    // Subscribe to shared items list — both users see the same wheel
+    gameOn('items', v => {
+        if (v && Array.isArray(v) && v.length >= 2) {
+            wheelItems = v;
+        } else if (!v) {
+            // First time / no data — seed with defaults locally
+            wheelItems = [...DEFAULT_WHEEL_ITEMS];
+        }
+        // else: v exists but malformed (e.g. empty), keep defaults
+        drawWheel();
+        renderWheelChips();
+    });
     drawWheel();
     renderWheelChips();
 }
@@ -111,15 +123,15 @@ function addWheelItem() {
     const input = document.getElementById('wheelAddInput');
     const text = input.value.trim();
     if (!text || wheelItems.length >= 12) return;
-    wheelItems.push(text);
+    const newItems = [...wheelItems, text];
     input.value = '';
-    drawWheel();
-    renderWheelChips();
+    gameSync('items', newItems);
+    // Listener updates local wheelItems + re-renders
 }
 
 function removeWheelItem(idx) {
     if (wheelItems.length <= 2) return;
-    wheelItems.splice(idx, 1);
-    drawWheel();
-    renderWheelChips();
+    const newItems = wheelItems.filter((_, i) => i !== idx);
+    gameSync('items', newItems);
+    // Listener updates local wheelItems + re-renders
 }

@@ -38,6 +38,61 @@
         }
 
         /* =============================================
+           POLISH — mobile-specific overrides
+           (Audit #5: dot nav must not break mobile)
+           ============================================= */
+        @media (max-width: 720px) {
+            /* The right-side dot nav is too cramped on
+               phones — hide it entirely below 720px. */
+            .dot-nav { display: none !important; }
+
+            /* Together cards lose the hover affordance
+               (no hover on touch) but keep the press. */
+            .together-card { padding: 26px 22px; }
+            .together-card::after { display: none; } /* arrow chevron meaningless on touch */
+            .together-card:hover { transform: none; }
+            .together-card:active { transform: scale(0.99); }
+
+            /* Card titles scale down a bit so the grid
+               still breathes. */
+            .together-card-title { font-size: 1.3rem; }
+
+            /* Why I Love You accent — pill moves below
+               the title for narrow widths. */
+            .together-card:has(#loveWallGrid) .together-card-header {
+                flex-wrap: wrap;
+            }
+
+            /* Games collapse: on mobile we always show
+               all 12 (the hover trick doesn't work well
+               with touch) but in a tighter 2-col grid. */
+            .game-card:nth-child(n+7) {
+                opacity: 1;
+                filter: none;
+                transform: none;
+                max-height: none;
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+            .games-grid::after {
+                content: 'Tap any game to play';
+                font-size: 0.88rem;
+                border-style: solid;
+            }
+            .games-section {
+                margin-top: 36px;
+                padding: 24px 18px 28px;
+            }
+            /* Section header gets a touch more space. */
+            .games-section-header h3 { font-size: 1.4rem; }
+        }
+        @media (max-width: 480px) {
+            /* On very small screens the games go 1-col
+               to keep the icons readable. */
+            .games-grid { grid-template-columns: 1fr; }
+        }
+
+        /* =============================================
            20-AGENT CRITIQUE FIXES
            ============================================= */
 

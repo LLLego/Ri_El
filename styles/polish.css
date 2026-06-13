@@ -1,0 +1,582 @@
+        /* =============================================
+           POLISH.CSS — May 30 Design Audit Fixes
+           =============================================
+           This file is the LAST stylesheet in the load
+           order (added after responsive.css), so every
+           rule here wins against the older CSS. It holds
+           the six audit fixes:
+
+             1. Body & subtitle text too small
+             2. Cards don't feel clickable
+             3. Game grid dominates
+             4. "Why I Love You" list is buried
+             5. No section navigation
+             6. Typography is generic
+
+           Hard rules respected:
+             - No new colors (uses CSS vars from variables.css)
+             - No new fonts (uses the 5 already loaded)
+             - No JavaScript (CSS-only)
+             - All polish works across the 6 themes
+             - Mobile (<=720px) safe
+           ============================================= */
+
+        /* =============================================
+           1.  TEXT — bump the 11-13px bits to 14-15px
+           ============================================= */
+        /* Most .together-card sub-titles were 0.72rem (≈12px).
+           Bumping to 0.9rem (≈14.4px) gives a clearly
+           readable label without breaking the layout. */
+        .together-card-subtitle {
+            font-size: 0.9rem;                   /* was 0.72rem */
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        .together-hero-sub {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        /* Game card descriptions were 0.78rem (≈13px). */
+        .game-card-desc {
+            font-size: 0.9rem;                   /* was 0.78rem */
+            line-height: 1.55;
+        }
+        .game-card-name {
+            font-size: 1.2rem;                   /* was 1.1rem */
+            margin-bottom: 8px;
+        }
+        /* Bucket-list, sticky notes, letters — all had
+           body copy at 0.82-0.85rem. Lift to 0.92rem. */
+        .bucket-text { font-size: 0.92rem; line-height: 1.5; }
+        .note-sticky { font-size: 0.92rem; line-height: 1.55; padding: 16px; }
+        .letters-send-btn, .bucket-add-btn, .notes-send-btn { font-size: 0.88rem; }
+        .mood-person-label, .mood-label, .qd-answer-text { font-size: 0.92rem; line-height: 1.5; }
+        .name-card-name { font-size: 1.25rem; }
+        .name-card-alt { font-size: 0.78rem; }
+        .modal-sub { font-size: 0.92rem; line-height: 1.55; }
+
+        /* =============================================
+           6.  TYPOGRAPHY — make it feel considered
+           =============================================
+           Card titles get the personal Caveat hand.
+           Big section titles (and the dot-nav labels)
+           get Playfair Display's editorial weight.
+           Hero / counter / song-chip keep Caveat. */
+        .together-card-title {
+            font-family: 'Caveat', cursive;
+            font-size: 1.45rem;                  /* was 1.15rem — more presence */
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            line-height: 1.15;
+            color: var(--text-primary);
+        }
+        .together-card-header {
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 22px;
+        }
+        .together-card-icon {
+            width: 44px; height: 44px;           /* was 40 — slightly larger */
+            border-radius: 13px;
+            font-size: 1.2rem;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+        }
+        /* Major section titles (timeline, song-wall, etc.)
+           should feel editorial, not generic. */
+        .section-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(1.7rem, 3.5vw, 2.1rem);
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            line-height: 1.2;
+            color: var(--text-primary);
+            transform: none;                     /* remove the Caveat-style rotate */
+        }
+        .section-label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+        }
+        /* The "Our Space Together" together-hero header
+           is a major section too — give it Playfair. */
+        .together-hero-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            font-weight: 600;
+            letter-spacing: -0.015em;
+            line-height: 1.1;
+            color: var(--accent-gold);
+            margin-bottom: 12px;
+        }
+        /* But the games-section header keeps Caveat — it
+           should feel like a casual little invitation. */
+        .games-section-header h3 {
+            font-family: 'Caveat', cursive;
+            font-size: 1.6rem;                   /* was 1.4rem */
+            font-weight: 600;
+        }
+        .games-section-header p { font-size: 0.88rem; }
+
+        /* =============================================
+           2.  CARDS — make them feel clickable
+           =============================================
+           Real hover lift, real press, real border bloom.
+           Uses a soft accent-warm tint so it works
+           across all 6 themes (no hard-coded color). */
+        .together-card {
+            border-radius: var(--radius-lg);
+            padding: 34px;
+            position: relative;
+            cursor: pointer;
+            transition:
+                transform var(--transition-slow) var(--ease-soft),
+                box-shadow var(--transition-slow) var(--ease-soft),
+                border-color var(--transition-slow) var(--ease-soft),
+                background-color var(--transition-speed) ease;
+        }
+        /* A tiny ⌃ chevron in the top-right that fades
+           in on hover — purely a "this is interactive" cue. */
+        .together-card::after {
+            content: '⌃';
+            position: absolute;
+            top: 18px; right: 22px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            opacity: 0;
+            transform: translateY(4px) rotate(45deg);
+            transition:
+                opacity var(--transition-base) var(--ease-soft),
+                transform var(--transition-base) var(--ease-soft),
+                color var(--transition-base) var(--ease-soft);
+            pointer-events: none;
+        }
+        .together-card:hover {
+            transform: translateY(-4px);
+            border-color: color-mix(in srgb, var(--accent-warm) 28%, transparent);
+            box-shadow: var(--shadow-hover);
+            background: color-mix(in srgb, var(--bg-card) 82%, transparent);
+        }
+        .together-card:hover::after {
+            opacity: 1;
+            transform: translateY(0) rotate(45deg);
+            color: var(--accent-warm);
+        }
+        .together-card:active {
+            transform: translateY(-1px) scale(0.995);
+            box-shadow: var(--shadow-press);
+            transition-duration: 0.08s;
+        }
+        /* Soft accent line at the top edge that draws in
+           on hover — works for any theme. */
+        .together-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 28px; right: 28px;
+            height: 2px;
+            background: linear-gradient(90deg,
+                transparent,
+                color-mix(in srgb, var(--accent-warm) 70%, transparent),
+                color-mix(in srgb, var(--accent-gold) 70%, transparent),
+                transparent);
+            border-radius: 2px;
+            opacity: 0;
+            transform: scaleX(0.4);
+            transform-origin: center;
+            transition:
+                opacity var(--transition-slow) var(--ease-soft),
+                transform var(--transition-slow) var(--ease-soft);
+        }
+        .together-card:hover::before {
+            opacity: 1;
+            transform: scaleX(1);
+        }
+
+        /* =============================================
+           4.  "WHY I LOVE YOU" — give it a real accent
+           =============================================
+           This card contains #loveWallGrid. We use :has()
+           (broadly supported in 2024+ browsers) so we don't
+           need an HTML class. Subtle warm-to-pink gradient
+           border, slightly stronger shadow, pink heart
+           glow — still uses only existing palette. */
+        .together-card:has(#loveWallGrid) {
+            background:
+                linear-gradient(135deg,
+                    color-mix(in srgb, var(--accent-pink) 8%, var(--bg-card)),
+                    color-mix(in srgb, var(--accent-warm) 6%, var(--bg-card)));
+            border: 1px solid color-mix(in srgb, var(--accent-pink) 22%, transparent);
+            box-shadow:
+                0 1px 4px rgba(0, 0, 0, 0.06),
+                0 0 0 1px color-mix(in srgb, var(--accent-pink) 8%, transparent);
+            position: relative;
+        }
+        /* "FEATURED" pill in the top-left. Pure CSS — no
+           HTML change needed. Uses ::before on the inner
+           .together-card-title of the Why I Love You card. */
+        .together-card:has(#loveWallGrid) .together-card-header::before {
+            content: '♥ Featured';
+            display: inline-block;
+            font-family: 'Caveat', cursive;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--accent-pink);
+            background: color-mix(in srgb, var(--accent-pink) 14%, transparent);
+            border: 1px solid color-mix(in srgb, var(--accent-pink) 30%, transparent);
+            padding: 2px 10px;
+            border-radius: 999px;
+            margin-bottom: 6px;
+            align-self: flex-start;
+            order: -1;
+        }
+        .together-card:has(#loveWallGrid) .together-card-title {
+            color: var(--accent-pink);
+        }
+        .together-card:has(#loveWallGrid):hover {
+            border-color: color-mix(in srgb, var(--accent-pink) 45%, transparent);
+            box-shadow:
+                var(--shadow-hover),
+                0 0 24px color-mix(in srgb, var(--accent-pink) 10%, transparent);
+        }
+        .together-card:has(#loveWallGrid) .love-wall-card {
+            border-color: color-mix(in srgb, var(--accent-pink) 12%, transparent);
+        }
+        .together-card:has(#loveWallGrid) .love-wall-card:hover {
+            border-color: var(--accent-pink);
+            background: color-mix(in srgb, var(--accent-pink) 8%, transparent);
+        }
+
+        /* =============================================
+           3.  GAMES — collapse to 6 by default
+           =============================================
+           Audit says: "should be de-emphasized (collapse
+           to 6 visible by default with 'Show all 12'
+           toggle)". CSS-only with no HTML edits is
+           constrained, so we do a strong de-emphasis:
+           cards 7-12 are visually de-prioritised (smaller
+           tiles, dimmer, on a "Show more games" gradient
+           curtain) and they expand to full opacity on
+           hover/focus-within of the games section. A
+           labelled "Show all 12 ▾" affordance sits at the
+           bottom of the grid using ::after. */
+        .games-section {
+            margin-top: 56px;                    /* was 40 — give it air */
+            padding: 32px 24px 36px;
+            border-radius: var(--radius-lg);
+            background:
+                linear-gradient(180deg,
+                    color-mix(in srgb, var(--bg-card) 35%, transparent) 0%,
+                    color-mix(in srgb, var(--bg-secondary) 18%, transparent) 100%);
+            border: 1px solid color-mix(in srgb, var(--accent-warm) 10%, transparent);
+            position: relative;
+        }
+        .games-section-header {
+            padding: 0 0 18px;
+            margin-bottom: 6px;
+            border-bottom: 1px solid color-mix(in srgb, var(--accent-warm) 14%, transparent);
+        }
+        .games-section-header p { font-size: 0.88rem; }
+
+        /* The visible 6 cards keep full polish. */
+        .games-grid {
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 18px;
+            margin-top: 22px;
+        }
+        .game-card {
+            background: color-mix(in srgb, var(--bg-card) 58%, transparent);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 24px 20px;
+            min-height: 130px;
+            transition:
+                transform var(--transition-slow) var(--ease-bounce),
+                box-shadow var(--transition-slow) var(--ease-soft),
+                border-color var(--transition-slow) var(--ease-soft),
+                background-color var(--transition-speed) ease,
+                filter var(--transition-base) ease;
+        }
+        .game-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: color-mix(in srgb, var(--accent-warm) 45%, transparent);
+            box-shadow:
+                0 10px 28px rgba(0, 0, 0, 0.18),
+                0 0 0 1px color-mix(in srgb, var(--accent-warm) 20%, transparent);
+            background: color-mix(in srgb, var(--bg-card) 78%, transparent);
+            filter: saturate(1.1);
+        }
+        .game-card:active {
+            transform: translateY(-2px) scale(0.99);
+            transition-duration: 0.08s;
+        }
+
+        /* Cards 7-12: dim them and pull them in, then on
+           hover/focus of the .games-section they bloom. */
+        .game-card:nth-child(n+7) {
+            opacity: 0.45;
+            filter: saturate(0.6) blur(0.4px);
+            transform: scale(0.96);
+            max-height: 130px;
+            overflow: hidden;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .games-section:hover .game-card:nth-child(n+7),
+        .games-section:focus-within .game-card:nth-child(n+7) {
+            opacity: 1;
+            filter: saturate(1) blur(0);
+            transform: scale(1);
+            max-height: 400px;
+            padding-top: 24px;
+            padding-bottom: 24px;
+        }
+        .games-section:hover .game-card:nth-child(n+7):hover,
+        .games-section:focus-within .game-card:nth-child(n+7):hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        /* The "Show all 12" affordance — a CSS-only label
+           that sits between the 6th and 7th game card. We
+           use a positioned ::after on the .games-grid. */
+        .games-grid {
+            position: relative;
+        }
+        .games-grid::after {
+            content: 'Hover here to show all 12 games ▾';
+            display: block;
+            grid-column: 1 / -1;
+            margin: 18px auto 0;
+            padding: 10px 22px;
+            font-family: 'Caveat', cursive;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-align: center;
+            border-radius: 999px;
+            border: 1px dashed color-mix(in srgb, var(--accent-warm) 28%, transparent);
+            background: color-mix(in srgb, var(--accent-warm) 4%, transparent);
+            letter-spacing: 0.04em;
+            cursor: pointer;
+            transition:
+                color var(--transition-base) ease,
+                border-color var(--transition-base) ease,
+                background-color var(--transition-base) ease;
+        }
+        .games-section:hover .games-grid::after,
+        .games-section:focus-within .games-grid::after {
+            content: 'Showing all 12 games ▴';
+            color: var(--accent-warm);
+            border-color: color-mix(in srgb, var(--accent-warm) 50%, transparent);
+            background: color-mix(in srgb, var(--accent-warm) 10%, transparent);
+        }
+
+        /* =============================================
+           5.  DOT NAV — sticky right-side nav for Together
+           =============================================
+           The .dot-nav element is a small <nav> the
+           integration step will add. We provide the full
+           styling here. Hidden under 720px (mobile).
+
+           Expected HTML (added by integration):
+             <nav class="dot-nav" aria-label="Together sections">
+               <a class="dot-nav-item" href="#thinkingBtn"
+                  data-label="Thinking"><span></span></a>
+               <a class="dot-nav-item" href="#loveWallGrid"
+                  data-label="Love Wall"><span></span></a>
+               <a class="dot-nav-item" href="#bucketList"
+                  data-label="Bucket List"><span></span></a>
+               <a class="dot-nav-item" href="#openWhenContent"
+                  data-label="Open When"><span></span></a>
+               <a class="dot-nav-item" href="#cdDays"
+                  data-label="Countdown"><span></span></a>
+               <a class="dot-nav-item" href="#gameOverlay"
+                  data-label="Play"><span></span></a>
+             </nav> */
+        .dot-nav {
+            position: fixed;
+            top: 50%;
+            right: 18px;
+            transform: translateY(-50%);
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            padding: 14px 10px;
+            background: color-mix(in srgb, var(--bg-card) 50%, transparent);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 999px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition-slow) var(--ease-soft);
+        }
+        /* Only show the dot nav when the Together tab is
+           active. We target the body class set by JS
+           (data-attribute would work too). */
+        body.together-active .dot-nav,
+        #tab-together.active ~ * .dot-nav,
+        .tab-pill[data-tab="together"].active ~ .dot-nav {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        /* If the integration also tags the nav with
+           data-show-when="together" we honour that. */
+        .dot-nav[data-show-when="together"] {
+            display: none;
+        }
+        .dot-nav[data-show-when="together"].is-visible {
+            display: flex;
+        }
+        .dot-nav-item {
+            position: relative;
+            width: 12px;
+            height: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+        .dot-nav-item span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: color-mix(in srgb, var(--text-muted) 60%, transparent);
+            transition:
+                transform var(--transition-base) var(--ease-bounce),
+                background-color var(--transition-base) ease,
+                box-shadow var(--transition-base) ease;
+        }
+        .dot-nav-item::before {
+            content: attr(data-label);
+            position: absolute;
+            right: 22px;
+            top: 50%;
+            transform: translateY(-50%) translateX(6px);
+            font-family: 'Caveat', cursive;
+            font-size: 0.95rem;
+            color: var(--accent-warm);
+            background: color-mix(in srgb, var(--bg-card) 92%, transparent);
+            border: 1px solid color-mix(in srgb, var(--accent-warm) 24%, transparent);
+            padding: 3px 10px;
+            border-radius: 8px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition:
+                opacity var(--transition-base) ease,
+                transform var(--transition-base) var(--ease-soft);
+        }
+        .dot-nav-item:hover span,
+        .dot-nav-item:focus-visible span {
+            transform: scale(1.4);
+            background: var(--accent-warm);
+            box-shadow: 0 0 10px color-mix(in srgb, var(--accent-warm) 45%, transparent);
+        }
+        .dot-nav-item:hover::before,
+        .dot-nav-item:focus-visible::before {
+            opacity: 1;
+            transform: translateY(-50%) translateX(0);
+        }
+        /* Soft active state via :target doesn't quite work
+           for in-page anchors, so we lean on hover. If the
+           integration adds an .is-active class via
+           IntersectionObserver in a future JS pass, this
+           already styles it. */
+        .dot-nav-item.is-active span {
+            background: var(--accent-gold);
+            box-shadow: 0 0 10px color-mix(in srgb, var(--accent-gold) 50%, transparent);
+        }
+
+        /* =============================================
+           BELL & WHISTLE — small consistent polish
+           ============================================= */
+        /* Slightly more breathing room between cards. */
+        .together-grid { gap: 26px; }
+        /* Subtle inner border on cards that contain
+           icons, to feel more "designed". */
+        .together-card { border: 1px solid rgba(200, 170, 140, 0.08); }
+        /* Footer heart divider — same accent. */
+        .footer::before {
+            background: linear-gradient(180deg,
+                transparent 0%,
+                color-mix(in srgb, var(--accent-pink) 6%, transparent) 50%,
+                transparent 100%);
+        }
+        /* Make sure the sticky top counter-bar doesn't
+           overlap the new big section title. */
+        .together-hero { padding: 130px 0 24px; }
+        /* Polish the song-chip "wall" feel. */
+        .song-list-mini { gap: 10px; margin-top: 14px; }
+        /* Card gallery items get the same hover pop. */
+        .card-gallery-item:hover { transform: translateY(-3px) scale(1.01) !important; }
+        /* When the user focuses a card via keyboard, give
+           it the same visual treatment as hover. */
+        .together-card:focus-within {
+            transform: translateY(-4px);
+            border-color: color-mix(in srgb, var(--accent-warm) 30%, transparent);
+            box-shadow: var(--shadow-hover);
+        }
+        .together-card:focus-within::after {
+            opacity: 1;
+            transform: translateY(0) rotate(45deg);
+            color: var(--accent-warm);
+        }
+        .together-card:focus-within::before {
+            opacity: 1;
+            transform: scaleX(1);
+        }
+
+        /* =============================================
+           OPENING ANIMATION — heart-burst confetti
+           Triggered by js/opening.js → burstHearts()
+           16 particles spread outward from a point,
+           each one a randomized heart/sparkle glyph.
+           ============================================= */
+        .heart-burst {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%) scale(0.5);
+            opacity: 0;
+            animation: heartBurst 950ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            will-change: transform, opacity;
+            line-height: 1;
+        }
+        @keyframes heartBurst {
+            0%   { opacity: 0;   transform: translate(-50%, -50%) scale(0.4) rotate(0deg); }
+            18%  { opacity: 1;   transform: translate(-50%, -50%) scale(1.15) rotate(0deg); }
+            100% { opacity: 0;   transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, 0px))) scale(0.7) rotate(var(--rot, 180deg)); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .heart-burst { display: none; }
+        }
+
+        /* =============================================
+           BREATHING SVG DECORATIONS
+           Slow gentle scale + rotate on the 8 floating
+           decos so the page feels alive. Staggered
+           delays keep them from pulsing in sync.
+           ============================================= */
+        .floating-deco {
+            animation: breathe 5.5s ease-in-out infinite;
+            transform-origin: center;
+            will-change: transform;
+        }
+        @keyframes breathe {
+            0%, 100% { transform: scale(1)    rotate(0deg);   }
+            50%      { transform: scale(1.05) rotate(2deg);   }
+        }
+        #decoTigger       { animation-delay:  0.0s; animation-duration: 5.0s; }
+        #decoPucca        { animation-delay: -1.2s; animation-duration: 6.0s; }
+        #decoPoco         { animation-delay: -0.5s; animation-duration: 5.5s; }
+        #decoKuromi       { animation-delay: -2.1s; animation-duration: 6.5s; }
+        #decoCinnamoroll  { animation-delay: -3.0s; animation-duration: 5.0s; }
+        #decoHelloKitty   { animation-delay: -1.8s; animation-duration: 6.2s; }
+        #decoTotoro       { animation-delay: -2.5s; animation-duration: 5.8s; }
+        #decoOctopus      { animation-delay: -0.8s; animation-duration: 5.4s; }
+        #decoStar         { animation-delay: -3.5s; animation-duration: 6.8s; }
+        #decoHeartWing    { animation-delay: -1.5s; animation-duration: 5.2s; }
+        @media (prefers-reduced-motion: reduce) {
+            .floating-deco { animation: none !important; }
+        }

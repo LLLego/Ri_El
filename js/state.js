@@ -132,3 +132,12 @@ let ROBLOX_ALL_GAMES = [];
 const ROBLOX_FEATURED_COUNT = 12;
 let robloxCat = 'all';
 let robloxVotes = {};
+
+// Truth or Dare state (added for Firebase sync)
+let tdType = null;          // 'truth' | 'dare' | null
+let tdText = null;          // current prompt text
+let tdMyAnswer = null;      // my answer to current prompt
+let tdTheirAnswer = null;   // partner's answer to current prompt
+
+// Watchlist state (mirror of Firebase, kept in sync via gameOn)
+let wlData = {};

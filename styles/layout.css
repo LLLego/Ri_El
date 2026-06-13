@@ -11,6 +11,20 @@
         .reveal-scale.visible { opacity: 1; transform: scale(1); }
 
         /* =============================================
+           POLISH — May 30 audit (body & layout text)
+           Base body font-size & line-height live in variables.css.
+           Here we bump any layout-scoped text that still rendered
+           at the old 0.7-0.8rem (11-13px) sizes — audit #1.
+           ============================================= */
+        .song-chip { font-size: 0.85rem; padding: 5px 14px; }   /* was 0.75rem (12px) */
+        .dreams-mini-col li { font-size: 0.92rem; }              /* was 0.85rem */
+        .milestone-text { font-size: 0.95rem; line-height: 1.6; } /* was 0.9rem */
+        .timeline-quote-text { font-size: 1.25rem; line-height: 1.55; }
+        .footer-text { font-size: 1.05rem; line-height: 1.7; }
+        .song-wall-meta, .song-wall-monthsary { font-size: 0.78rem; } /* was 0.8/0.7rem */
+        .letter-text { line-height: 1.85; font-size: 1.2rem; }
+
+        /* =============================================
            COUNTER BAR
            ============================================= */
         .counter-bar {

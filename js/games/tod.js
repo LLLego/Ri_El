@@ -1,6 +1,8 @@
 // =============================================
 // TRUTH OR DARE GAME
 // =============================================
+// tdType, tdText, tdMyAnswer, tdTheirAnswer declared in state.js
+
 const TRUTHS = [
     "What's the first thing you noticed about me?",
     "When did you know you were in love with me?",
@@ -43,6 +45,7 @@ const DARES = [
 ];
 
 function renderTOD(container) {
+    tdType = null; tdText = null; tdMyAnswer = null; tdTheirAnswer = null;
     container.innerHTML = `
         <div class="game-title">Truth or Dare</div>
         <div class="game-subtitle">Couple's Edition &#x2764;</div>
@@ -59,16 +62,87 @@ function renderTOD(container) {
             </div>
         </div>
     `;
+    // Listen for shared prompt + per-player answers
+    gameOn('type', v => { tdType = v; tdRenderRound(container); });
+    gameOn('text', v => { tdText = v; tdRenderRound(container); });
+    gameOn(myId() + '/answer', v => { tdMyAnswer = v; tdRenderRound(container); });
+    gameOn(partnerId() + '/answer', v => { tdTheirAnswer = v; tdRenderRound(container); });
+}
+
+function tdRenderRound(container) {
+    if (!tdType || !tdText) {
+        // No active round — show choice buttons
+        const content = document.getElementById('todContent');
+        if (!content) return;
+        content.innerHTML = `
+            <div class="tod-choice">
+                <div class="tod-btn truth" onclick="pickTOD('truth')">
+                    <div class="tod-btn-emoji">&#x1F4DC;</div>
+                    <div class="tod-btn-label">Truth</div>
+                </div>
+                <div class="tod-btn dare" onclick="pickTOD('dare')">
+                    <div class="tod-btn-emoji">&#x1F525;</div>
+                    <div class="tod-btn-label">Dare</div>
+                </div>
+            </div>
+        `;
+        return;
+    }
+    const content = document.getElementById('todContent');
+    if (!content) return;
+    const myBox = tdMyAnswer
+        ? `<div class="td-answer-text">${escapeHtml(tdMyAnswer)}</div>`
+        : `<input class="td-input" id="tdInput" placeholder="Type your answer..." maxlength="300">
+           <button class="td-submit-btn" onclick="tdSubmit()">Send</button>`;
+    const theirBox = tdTheirAnswer
+        ? `<div class="td-answer-text">${escapeHtml(tdTheirAnswer)}</div>`
+        : `<div class="td-answer-text td-waiting"><em>Waiting for ${escapeHtml(partnerName())}...</em></div>`;
+    const nextBtn = (tdMyAnswer && tdTheirAnswer)
+        ? `<button class="tod-next-btn" onclick="tdNext()">Next Round</button>`
+        : '';
+    content.innerHTML = `
+        <div class="tod-card">
+            <div class="tod-card-type ${tdType}">${tdType}</div>
+            <div class="tod-card-text">${escapeHtml(tdText)}</div>
+        </div>
+        <div class="td-answers">
+            <div class="td-answer-box">
+                <div class="td-answer-name">You</div>
+                ${myBox}
+            </div>
+            <div class="td-answer-box">
+                <div class="td-answer-name">${escapeHtml(partnerName())}</div>
+                ${theirBox}
+            </div>
+        </div>
+        ${nextBtn}
+    `;
 }
 
 function pickTOD(type) {
     const pool = type === 'truth' ? TRUTHS : DARES;
     const text = pool[Math.floor(Math.random() * pool.length)];
-    document.getElementById('todContent').innerHTML = `
-        <div class="tod-card">
-            <div class="tod-card-type ${type}">${type}</div>
-            <div class="tod-card-text">${text}</div>
-        </div>
-        <button class="tod-next-btn" onclick="renderTOD(document.getElementById('gameContainer'))">Next Round</button>
-    `;
+    // Sync new round and clear both answers
+    gameSync('type', type);
+    gameSync('text', text);
+    gameSync(myId() + '/answer', null);
+    gameSync(partnerId() + '/answer', null);
+    // Listeners will trigger tdRenderRound
+}
+
+function tdSubmit() {
+    const inp = document.getElementById('tdInput');
+    if (!inp || !inp.value.trim()) return;
+    gameSync(myId() + '/answer', inp.value.trim());
+    inp.disabled = true;
+    const btn = document.querySelector('.td-submit-btn');
+    if (btn) btn.disabled = true;
+}
+
+function tdNext() {
+    gameSync('type', null);
+    gameSync('text', null);
+    gameSync(myId() + '/answer', null);
+    gameSync(partnerId() + '/answer', null);
+    // Listeners will trigger tdRenderRound and re-show choice buttons
 }
